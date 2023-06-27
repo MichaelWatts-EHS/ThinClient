@@ -2,6 +2,7 @@
 Preseed a linux install for use as a Thin Client
 
 B.4.0. Command line switches
+
 Normally the installer asks for the localization info immediately (before preseeding).  
 Passing the "auto=true" switch tells it to wait until after the preseed file has been read.
   auto=true
