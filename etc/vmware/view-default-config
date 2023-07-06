@@ -1,0 +1,11 @@
+view.autoConnectBroker="vdi.ehs.govt.state.ma.us"
+view.defaultBroker="vdi.ehs.govt.state.ma.us"
+view.defaultDesktop="Standard Desktop"
+view.hideClientAfterLaunchSession=TRUE
+view.autoConnectDesktop=TRUE
+view.autoHideToolbar=TRUE
+view.fullScreen=TRUE
+view.nomenubar=TRUE
+view.once=TRUE
+view.defaultDomain=EHS
+view.usbAutoConnectOnInsert=TRUE
