@@ -1,0 +1,11 @@
+[Desktop Entry]
+Comment=Start the PulseAudio Sound System
+Exec=start-pulseaudio-x11
+Hidden=true
+Name=PulseAudio Sound System
+Terminal=false
+Type=Application
+Version=1.0
+X-GNOME-Autostart-Phase=Initialization
+X-GNOME-HiddenUnderSystemd=true
+X-KDE-autostart-phase=1

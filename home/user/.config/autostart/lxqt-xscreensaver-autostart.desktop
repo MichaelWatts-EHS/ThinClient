@@ -1,0 +1,8 @@
+[Desktop Entry]
+Exec=xscreensaver -no-splash
+Hidden=true
+Name=XScreenSaver
+OnlyShowIn=LXQt;
+TryExec=xscreensaver
+Type=Application
+Version=1.0

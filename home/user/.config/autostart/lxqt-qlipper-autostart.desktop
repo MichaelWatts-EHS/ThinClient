@@ -1,0 +1,8 @@
+[Desktop Entry]
+Exec=qlipper
+Hidden=true
+Name=Qlipper
+OnlyShowIn=LXQt;
+TryExec=qlipper
+Type=Application
+X-LXQt-Need-Tray=true
