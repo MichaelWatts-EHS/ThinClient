@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Exec=systemctl poweroff --quiet
+Icon=system-shutdown
+Categories=System;X-Leave;
+OnlyShowIn=LXQt;
+
+Name=Shutdown
+GenericName=Shutdown the machine
+Comment=Shutdown the machine
