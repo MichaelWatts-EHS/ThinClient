@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Exec=lxqt-leave --logout
+Icon=system-log-out
+Categories=System;X-Leave;
+OnlyShowIn=LXQt;
+NoDisplay=true
+
+Name=Logout
+GenericName=Logout from the current session
+Comment=Logout from the current session

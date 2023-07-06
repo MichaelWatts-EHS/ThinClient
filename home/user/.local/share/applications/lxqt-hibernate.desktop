@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Exec=lxqt-leave --hibernate
+Icon=system-suspend-hibernate
+Categories=System;X-Leave;
+OnlyShowIn=LXQt;
+NoDisplay=true
+
+Name=Hibernate
+GenericName=Hibernate the machine
+Comment=Hibernate the machine

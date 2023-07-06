@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Exec=lxqt-leave --lockscreen
+Icon=system-lock-screen
+Categories=System;Screensaver;
+OnlyShowIn=LXQt;
+NoDisplay=true
+
+Name=Lock Screen
+GenericName=Lock the current session
+Comment=Lock the current session
