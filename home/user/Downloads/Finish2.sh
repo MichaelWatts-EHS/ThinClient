@@ -2,6 +2,7 @@
 
 rm "/home/user/Desktop/Finish1.sh"
 
+#cp -f -R /home/user/Downloads/ThinClient/etc /home/..
 
 
 # Pulse VPN Client
