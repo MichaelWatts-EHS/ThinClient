@@ -2,6 +2,8 @@
 
 # WIP
 git clone https://github.com/MichaelWatts-EHS/ThinClient.git /home/user/Downloads/ThinClient
+cp -f -R /home/user/Downloads/ThinClient/home/user/.config /home/user
+cp -f -R /home/user/Downloads/ThinClient/home/user/.local /home/user
 
 # These binaries are too big for github so we'll get them from the manufacturers
 
