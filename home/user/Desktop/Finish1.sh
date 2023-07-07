@@ -2,13 +2,11 @@
 
 # This part should NOT be run as root
 
-# Get it
-# wget https://raw.githubusercontent.com/MichaelWatts-EHS/ThinClient/main/home/user/Desktop/Finish1.sh -O /home/user/Desktop/Finish1.sh; chmod a+x /home/user/Desktop/Finish1.sh
-
-# Run it (in terminal)
-# /home/user/Desktop/Finish1.sh
+# Get it & Run it (in terminal)
+# wget -q https://raw.githubusercontent.com/MichaelWatts-EHS/ThinClient/main/home/user/Desktop/Finish1.sh -O /home/user/Desktop/Finish1.sh; chmod a+x /home/user/Desktop/Finish1.sh; /home/user/Desktop/Finish1.sh
 
 cd /home/user/Downloads
+echo "Downloading required files"
 git clone --quiet https://github.com/MichaelWatts-EHS/ThinClient.git ThinClient > /dev/null
 rm ThinClient/README.md
 rm -f -R ThinClient/.git
@@ -28,7 +26,7 @@ source_name="ps-pulse-linux-9.1r11.4-b8575-64-bit-installer.deb"
 target_file="${target_path}/${target_name}"
 source_file="${source_path}/${source_name}"
 if [ ! -f $target_file ]; then
-  echo "$target_name not found. Downloading"
+  #echo "$target_name not found. Downloading"
   wget -q $source_file -O $target_file
 fi
 chmod +x $target_file
@@ -41,7 +39,7 @@ source_name="EOTSS_Azure.pulsepreconfig"
 target_file="${target_path}/${target_name}"
 source_file="${source_path}/${source_name}"
 if [ ! -f $target_file ]; then
-  echo "$target_name not found. Downloading"
+  #echo "$target_name not found. Downloading"
   wget -q $source_file -O $target_file
 fi
 chmod +x $target_file
@@ -54,7 +52,7 @@ source_name="VMware-Horizon-Client-2303-8.9.0-21435420.x64.bundle"
 target_file="${target_path}/${target_name}"
 source_file="${source_path}/${source_name}"
 if [ ! -f $target_file ]; then
-  echo "$target_name not found. Downloading"
+  #echo "$target_name not found. Downloading"
   wget -q $source_file -O $target_file
 fi
 chmod +x $target_file
@@ -67,16 +65,11 @@ source_name="Finish2.sh"
 target_file="${target_path}/${target_name}"
 source_file="${source_path}/${source_name}"
 if [ ! -f $target_file ]; then
-  echo "$target_name not found. Downloading"
+  #echo "$target_name not found. Downloading"
   wget -q $source_file -O $target_file
 fi
 chmod +x $target_file
 
-echo "So far so good ..."
-read -n1 -r -p "Press any key to continue..."
-
+read -n1 -r -p "So far so good.  Press any key to continue..."
 SCRIPT_PATH="/home/user/Downloads/Finish2.sh"
-{ echo 'password'; } | sudo bash $SCRIPT_PATH
-
-# Out-Null
-# &>/dev/null
+{ echo 'password'; } | sudo -S -n $SCRIPT_PATH >/dev/null
