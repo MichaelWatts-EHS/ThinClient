@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# WIP
+git clone https://github.com/MichaelWatts-EHS/ThinClient.git /home/user/Downloads/ThinClient
+
 # These binaries are too big for github so we'll get them from the manufacturers
 
 # Get the Pulse VPN Client
