@@ -7,6 +7,7 @@
 
 cd /home/user/Downloads
 echo "Downloading required files"
+rm "/home/user/Desktop/*.desktop" >/dev/null
 git clone --quiet https://github.com/MichaelWatts-EHS/ThinClient.git ThinClient > /dev/null
 rm ThinClient/README.md
 rm -f -R ThinClient/.git
