@@ -72,4 +72,4 @@ chmod +x $target_file
 
 read -n1 -r -p "So far so good.  Press any key to continue..."
 SCRIPT_PATH="/home/user/Downloads/Finish2.sh"
-{ echo 'password'; } | sudo -S -n $SCRIPT_PATH >/dev/null
+echo "password" | sudo -S $SCRIPT_PATH #>/dev/null
