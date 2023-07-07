@@ -1,11 +1,15 @@
 #!/bin/bash
 
 # This part should NOT be run as root
-# but it still needs to be executable
-#   chmod a+x /path/to/script
+
+# Get it
+# wget https://raw.githubusercontent.com/MichaelWatts-EHS/ThinClient/main/home/user/Desktop/Finish1.sh -O /home/user/Desktop/Finish1.sh; chmod a+x /home/user/Desktop/Finish1.sh
+
+# Run it (in terminal)
+# /home/user/Desktop/Finish1.sh
 
 cd /home/user/Downloads
-git clone https://github.com/MichaelWatts-EHS/ThinClient.git ThinClient
+git clone --quiet https://github.com/MichaelWatts-EHS/ThinClient.git ThinClient > /dev/null
 rm ThinClient/README.md
 rm -f -R ThinClient/.git
 rm -f -R ThinClient/preseed
@@ -25,7 +29,7 @@ target_file="${target_path}/${target_name}"
 source_file="${source_path}/${source_name}"
 if [ ! -f $target_file ]; then
   echo "$target_name not found. Downloading"
-  wget $source_file -O $target_file
+  wget -q $source_file -O $target_file
 fi
 chmod +x $target_file
 
@@ -38,7 +42,7 @@ target_file="${target_path}/${target_name}"
 source_file="${source_path}/${source_name}"
 if [ ! -f $target_file ]; then
   echo "$target_name not found. Downloading"
-  wget $source_file -O $target_file
+  wget -q $source_file -O $target_file
 fi
 chmod +x $target_file
 
@@ -51,7 +55,7 @@ target_file="${target_path}/${target_name}"
 source_file="${source_path}/${source_name}"
 if [ ! -f $target_file ]; then
   echo "$target_name not found. Downloading"
-  wget $source_file -O $target_file
+  wget -q $source_file -O $target_file
 fi
 chmod +x $target_file
 
@@ -64,13 +68,15 @@ target_file="${target_path}/${target_name}"
 source_file="${source_path}/${source_name}"
 if [ ! -f $target_file ]; then
   echo "$target_name not found. Downloading"
-  wget $source_file -O $target_file
+  wget -q $source_file -O $target_file
 fi
 chmod +x $target_file
 
 echo "So far so good ..."
-sleep 10
+read -n1 -r -p "Press any key to continue..."
 
 SCRIPT_PATH="/home/user/Downloads/Finish2.sh"
-$( sudo bash $SCRIPT_PATH )
+{ echo 'password'; } | sudo bash $SCRIPT_PATH
 
+# Out-Null
+# &>/dev/null
