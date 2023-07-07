@@ -1,11 +1,20 @@
 #!/bin/bash
 
-# WIP
-git clone https://github.com/MichaelWatts-EHS/ThinClient.git /home/user/Downloads/ThinClient
-cp -f -R /home/user/Downloads/ThinClient/home/user/.config /home/user
-cp -f -R /home/user/Downloads/ThinClient/home/user/.local /home/user
+# This part should NOT be run as root
+# but it still needs to be executable
+#   chmod a+x /path/to/script
 
-# These binaries are too big for github so we'll get them from the manufacturers
+cd /home/user/Downloads
+git clone https://github.com/MichaelWatts-EHS/ThinClient.git ThinClient
+rm ThinClient/README.md
+rm -f -R ThinClient/.git
+rm -f -R ThinClient/preseed
+
+cp -f -R ThinClient/home/user/.config /home/user
+cp -f -R ThinClient/home/user/.local /home/user
+cp -f -R ThinClient/home/user/Desktop /home/user
+cp -f -R ThinClient/home/user/Downloads /home/user
+rm -f -R ThinClient/home
 
 # Get the Pulse VPN Client
 target_path="/home/user/Downloads"
@@ -59,9 +68,9 @@ if [ ! -f $target_file ]; then
 fi
 chmod +x $target_file
 
-# Run Finish2.sh
-"/home/user/Downloads/Finish2.sh" | sudo bash
+echo "So far so good ..."
+sleep 10
 
-
-
+SCRIPT_PATH="/home/user/Downloads/Finish2.sh"
+$( sudo bash $SCRIPT_PATH )
 
