@@ -4,7 +4,8 @@
 rm "/home/user/Desktop/Finish1.sh"
 
 cp -f -R /home/user/Downloads/ThinClient/etc /
-sleep 1; rm -f -R /home/user/Downloads/ThinClient
+hostnamectl set-hostname thinclient
+rm -f -R /home/user/Downloads/ThinClient
 
 
 # Pulse VPN Client
@@ -20,7 +21,6 @@ echo 'Installing VMware Horizon View Client'
 echo "y" | '/home/user/Downloads/VMware-Horizon-Client.bundle' --console --required --stop-services >/dev/null
 rm /home/user/Downloads/VMware-Horizon-Client.bundle
 
-
-echo "Did it work?"
+systemctl --no-wall reboot
 
 
