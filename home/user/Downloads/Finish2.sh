@@ -7,6 +7,8 @@ cp -f -R /home/user/Downloads/ThinClient/etc /
 hostnamectl set-hostname thinclient
 rm -f -R /home/user/Downloads/ThinClient
 
+sed -i 's/"GRUB_TIMEOUT=5"/"GRUB_TIMEOUT=0"/' /etc/default/grub
+grub-mkconfig -o /boot/grub/grub.cfg >/dev/null
 
 # Pulse VPN Client
 echo 'Installing Pulse Secure VPN Client'
@@ -20,6 +22,7 @@ rm /Downloads/EOTSS_Azure.pulsepreconfig
 echo 'Installing VMware Horizon View Client'
 echo "y" | '/home/user/Downloads/VMware-Horizon-Client.bundle' --console --required --stop-services >/dev/null
 rm /home/user/Downloads/VMware-Horizon-Client.bundle
+
 
 systemctl --no-wall reboot
 
