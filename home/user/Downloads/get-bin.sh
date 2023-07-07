@@ -13,7 +13,7 @@ if [ ! -f $target_file ]; then
   echo "$target_name not found. Downloading"
   wget $source_file -O $target_file
 fi
-chmod +x $target_name
+chmod +x $target_file
 
 # Get the Pulse VPN Configuration
 target_path="/home/user/Downloads"
@@ -26,7 +26,7 @@ if [ ! -f $target_file ]; then
   echo "$target_name not found. Downloading"
   wget $source_file -O $target_file
 fi
-chmod +x $target_name
+chmod +x $target_file
 
 # Get the VMware Horizon Client
 target_path="/home/user/Downloads"
@@ -39,6 +39,7 @@ if [ ! -f $target_file ]; then
   echo "$target_name not found. Downloading"
   wget $source_file -O $target_file
 fi
+chmod +x $target_file
 
 
 
