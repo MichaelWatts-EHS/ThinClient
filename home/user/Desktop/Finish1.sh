@@ -13,6 +13,7 @@ rm -f -R ThinClient/.git
 rm -f -R ThinClient/preseed
 
 cp -f -R ThinClient/home/user/.config /home/user
+chmod a+x /home/user/.config/*.desktop
 cp -f -R ThinClient/home/user/.local /home/user
 cp -f -R ThinClient/home/user/Desktop /home/user
 cp -f -R ThinClient/home/user/Downloads /home/user
@@ -72,4 +73,4 @@ chmod +x $target_file
 
 read -n1 -r -p "So far so good.  Press any key to continue..."
 SCRIPT_PATH="/home/user/Downloads/Finish2.sh"
-echo "password" | sudo -S $SCRIPT_PATH #>/dev/null
+echo "password" | sudo -S $SCRIPT_PATH >/dev/null
