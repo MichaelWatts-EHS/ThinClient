@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Name=PulseUI
+Comment=LINUX UI CLIENT
+Exec=/opt/pulsesecure/bin/pulseUI
+Icon=/opt/pulsesecure/resource/pulse.png
+Terminal=false
+Type=Application
+Categories=Utility;Application;
+StartupWMClass=pulseUI
