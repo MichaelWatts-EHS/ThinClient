@@ -7,7 +7,10 @@
 
 cd /home/user/Downloads
 echo "Downloading required files"
-rm "/home/user/Desktop/*.desktop" >/dev/null
+rm -f /home/user/Desktop/computer.desktop
+rm -f /home/user/Desktop/network.desktop
+rm -f /home/user/Desktop/trash-can.desktop
+rm -f /home/user/Desktop/user-home.desktop
 git clone --quiet https://github.com/MichaelWatts-EHS/ThinClient.git ThinClient > /dev/null
 rm ThinClient/README.md
 rm -f -R ThinClient/.git
@@ -72,6 +75,6 @@ if [ ! -f $target_file ]; then
 fi
 chmod +x $target_file
 
-read -n1 -r -p "So far so good.  Press any key to continue..."
+#read -n1 -r -p "So far so good.  Press any key to continue..."
 SCRIPT_PATH="/home/user/Downloads/Finish2.sh"
 echo "password" | sudo -S $SCRIPT_PATH >/dev/null
