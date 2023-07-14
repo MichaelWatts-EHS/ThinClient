@@ -1,7 +1,9 @@
 #!/bin/bash
 
+echo "Run Finish2"
+
 # Cleanup the calling script
-rm "/home/user/Downloads/Finish1.sh"
+#rm "/home/user/Downloads/Finish1.sh"
 
 #cp -f -R /home/user/Downloads/ThinClient/etc /
 #hostnamectl set-hostname thinclient
