@@ -20,6 +20,7 @@ rm ThinClient/README.md
 rm -f -R ThinClient/.git
 rm -f -R ThinClient/preseed
 rm -f -R ThinClient/home/Finish1.sh
+mv ThinClient/home/Finish1.sh /ThinClient/
 
 # Get the Pulse VPN Client
 target_path="/home/user/Downloads/ThinClient/installs"
@@ -61,7 +62,6 @@ chmod +x $target_file
 
 # Get the Finish2.sh script
 target_path="/home/user/Downloads/ThinClient"
-cp -f -R ThinClient/home/Finish2.sh ${target_path}
 target_name="Finish2.sh"
 source_path="https://raw.githubusercontent.com/MichaelWatts-EHS/ThinClient/main/home"
 source_name="Finish2.sh"
@@ -76,6 +76,7 @@ chmod +x $target_file
 echo "Applying configuration files"
 cp -f -R ThinClient/home/user /home
 rm -f -R ThinClient/home/user
+rm -f -R ThinClient/home
 
 #read -n1 -r -p "So far so good.  Press any key to continue..."
 SCRIPT_PATH="/home/user/Downloads/ThinClient/Finish2.sh"
