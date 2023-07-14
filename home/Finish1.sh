@@ -75,6 +75,7 @@ if [ ! -f $target_file ]; then
 fi
 chmod +x $target_file
 
+echo "Applying configuration files"
 cp -f -R ThinClient/home/user /home
 rm -f -R ThinClient/home/user
 
