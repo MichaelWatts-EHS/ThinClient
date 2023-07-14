@@ -41,7 +41,8 @@ echo "y" | '/home/user/Downloads/ThinClient/installs/VMware-Horizon-Client.bundl
 #rm '/home/user/Downloads/EOTSS_Azure.pulsepreconfig' >/dev/null
 rm -f -R /home/user/Downloads/ThinClient/installs
 
-apt -y remove wget git zutty qlipper pulseaudio featherpad pcmanfm-qt qps
+apt -y remove wget git zutty qlipper pulseaudio featherpad pcmanfm-qt qps lximage-qt
+apt -y autoremove
 
 # Reboot
 systemctl --no-wall reboot
