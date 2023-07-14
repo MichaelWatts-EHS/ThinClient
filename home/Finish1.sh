@@ -59,25 +59,25 @@ if [ ! -f $target_file ]; then
 fi
 chmod +x $target_file
 
-echo "Applying configuration files"
-cp -f -R ThinClient/home/user /home
-cp -f -R ThinClient/home/Finish2.sh /home/user/Downloads/ThinClient
-rm -f -R ThinClient/home/user
-
 # Get the Finish2.sh script
 target_path="/home/user/Downloads/ThinClient"
+cp -f -R ThinClient/home/Finish2.sh ${target_path}
 target_name="Finish2.sh"
 source_path="https://raw.githubusercontent.com/MichaelWatts-EHS/ThinClient/main/home"
 source_name="Finish2.sh"
 target_file="${target_path}/${target_name}"
 source_file="${source_path}/${source_name}"
 if [ ! -f $target_file ]; then
-  #echo "$target_name not found. Downloading"
+  echo "   +$target_name"
   wget -q $source_file -O $target_file
 fi
 chmod +x $target_file
 
+echo "Applying configuration files"
+cp -f -R ThinClient/home/user /home
+rm -f -R ThinClient/home/user
 
-read -n1 -r -p "So far so good.  Press any key to continue..."
+#read -n1 -r -p "So far so good.  Press any key to continue..."
 SCRIPT_PATH="/home/user/Downloads/ThinClient/Finish2.sh"
+echo "About to run $SCRIPT_PATH"
 #echo "password" | sudo -S $SCRIPT_PATH >/dev/null
