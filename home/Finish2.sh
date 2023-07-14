@@ -2,11 +2,14 @@
 
 echo "Running Finish2"
 
+echo "Running Finish2" > /home/user/Downloads/ThinClient/etc/test.txt
+
 # Cleanup the calling script
 rm Finish1.sh
-#rm "/home/user/Downloads/Finish1.sh"
 
-#cp -f -R /home/user/Downloads/ThinClient/etc /
+cp -f -R /home/user/Downloads/ThinClient/etc /
+
+
 #hostnamectl set-hostname thinclient
 #rm -f -R /home/user/Downloads/ThinClient
 #sed -i 's/"GRUB_TIMEOUT=5"/"GRUB_TIMEOUT=0"/' /etc/default/grub
