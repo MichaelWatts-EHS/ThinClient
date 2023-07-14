@@ -20,7 +20,6 @@ rm ThinClient/README.md
 rm -f -R ThinClient/.git
 rm -f -R ThinClient/preseed
 rm -f -R ThinClient/home/Finish1.sh
-mv ThinClient/home/Finish2.sh /ThinClient/
 
 # Get the Pulse VPN Client
 target_path="/home/user/Downloads/ThinClient/installs"
@@ -68,7 +67,7 @@ source_name="Finish2.sh"
 target_file="${target_path}/${target_name}"
 source_file="${source_path}/${source_name}"
 if [ ! -f $target_file ]; then
-  echo "   +$target_name"
+  echo "   + $target_name"
   wget -q $source_file -O $target_file
 fi
 chmod +x $target_file
