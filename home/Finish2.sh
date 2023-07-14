@@ -8,12 +8,9 @@ echo "Running Finish2" > /home/user/Downloads/ThinClient/etc/test.txt
 rm Finish1.sh
 
 cp -f -R /home/user/Downloads/ThinClient/etc /
-
-
-#hostnamectl set-hostname thinclient
-#rm -f -R /home/user/Downloads/ThinClient
-#sed -i 's/"GRUB_TIMEOUT=5"/"GRUB_TIMEOUT=0"/' /etc/default/grub
-#grub-mkconfig -o /boot/grub/grub.cfg >/dev/null
+sed -i 's/"GRUB_TIMEOUT=5"/"GRUB_TIMEOUT=0"/' /etc/default/grub
+grub-mkconfig -o /boot/grub/grub.cfg >/dev/null
+hostnamectl set-hostname thinclient
 
 # Pulse VPN Client
 #echo 'Installing Pulse Secure VPN Client'
@@ -32,6 +29,8 @@ cp -f -R /home/user/Downloads/ThinClient/etc /
 #sleep 1
 #rm '/home/user/Downloads/VMware-Horizon-Client.bundle' >/dev/null
 
+#rm -f -R /home/user/Downloads/ThinClient
+
 # Reboot
-#systemctl --no-wall reboot
-#exit
+systemctl --no-wall reboot
+exit
