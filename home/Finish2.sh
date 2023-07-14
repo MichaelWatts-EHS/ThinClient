@@ -13,24 +13,34 @@ grub-mkconfig -o /boot/grub/grub.cfg >/dev/null
 
 hostnamectl set-hostname thinclient
 
-# Pulse VPN Client
-#echo 'Installing Pulse Secure VPN Client'
-#apt -y install '/home/user/Downloads/ps-pulse-linux-installer.deb' >/dev/null
-#sleep 1
-#/opt/pulsesecure/bin/jamCommand /importfile /home/user/Downloads/EOTSS_Azure.pulsepreconfig >/dev/null
-#sleep 1
-#/opt/pulsesecure/bin/setup_cef.sh install >/dev/null
-#sleep 1
-#rm '/home/user/Downloads/ps-pulse-linux-installer.deb' >/dev/null
-#rm '/home/user/Downloads/EOTSS_Azure.pulsepreconfig' >/dev/null
+apt update
+
+# Install Pulse VPN Client
+if [ ! -f /opt/pulsesecure/bin/pulseUI ]; then
+  echo 'Installing Pulse Secure VPN Client'
+  apt -y install '/home/user/Downloads/ThinClient/installs/ps-pulse-linux-installer.deb'
+fi
+
+if [ ! -f /opt/pulsesecure/lib/cefRuntime/Release/libcef.so ]; then
+  echo 'Installing Cef Runtime'
+  /opt/pulsesecure/bin/setup_cef.sh install
+fi
+
+# Configure Pulse Client
+if [ -f /opt/pulsesecure/bin/pulseUI ]; then
+  echo 'Configuring Pulse Secure VPN Client'
+  /opt/pulsesecure/bin/jamCommand /importfile /home/user/Downloads/ThinClient/installs/EOTSS_Azure.pulsepreconfig
+fi
 
 # VMware Horizon View
-#echo 'Installing VMware Horizon View Client'
-#echo "y" | '/home/user/Downloads/VMware-Horizon-Client.bundle' --console --required --stop-services >/dev/null
-#sleep 1
-#rm '/home/user/Downloads/VMware-Horizon-Client.bundle' >/dev/null
+echo 'Installing VMware Horizon View Client'
+echo "y" | '/home/user/Downloads/ThinClient/installs/VMware-Horizon-Client.bundle' --console --required --stop-services
 
-#rm -f -R /home/user/Downloads/ThinClient
+#rm '/home/user/Downloads/VMware-Horizon-Client.bundle' >/dev/null
+#rm '/home/user/Downloads/ps-pulse-linux-installer.deb' >/dev/null
+#rm '/home/user/Downloads/EOTSS_Azure.pulsepreconfig' >/dev/null
+rm -f -R /home/user/Downloads/ThinClient/installs
+
 read -n 1 -r -p "So far so good.  Press any key to reboot ..."
 
 # Reboot
