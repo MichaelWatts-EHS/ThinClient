@@ -2,7 +2,7 @@
 Encoding=UTF-8
 Type=Application
 Icon=/usr/share/icons/vmware-view.png
-Exec=vmware-view %u
+Exec=vmware-view --fullscreen
 MimeType=x-scheme-handler/vmware-view
 Categories=Application;Network;
 # TRANSLATORS: Ignore this string; do not translate.
