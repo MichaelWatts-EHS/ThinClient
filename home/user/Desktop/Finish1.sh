@@ -18,9 +18,11 @@ git clone --quiet https://github.com/MichaelWatts-EHS/ThinClient.git ThinClient 
 rm ThinClient/README.md
 rm -f -R ThinClient/.git
 rm -f -R ThinClient/preseed
+mkdir ThinClient/installs
+
 
 # Get the Pulse VPN Client
-target_path="/home/user/Downloads"
+target_path="/home/user/Downloads/ThinClient/installs"
 target_name="ps-pulse-linux-installer.deb"
 source_path="https://application.ivanti.com/SSG/Clients"
 source_name="ps-pulse-linux-9.1r11.4-b8575-64-bit-installer.deb"
@@ -33,7 +35,7 @@ fi
 chmod +x $target_file
 
 # Get the Pulse VPN Configuration
-target_path="/home/user/Downloads"
+target_path="/home/user/Downloads/ThinClient/installs"
 target_name="EOTSS_Azure.pulsepreconfig"
 source_path="https://raw.githubusercontent.com/MichaelWatts-EHS/ThinClient/main/home/user/Downloads"
 source_name="EOTSS_Azure.pulsepreconfig"
@@ -46,7 +48,7 @@ fi
 chmod +x $target_file
 
 # Get the VMware Horizon Client
-target_path="/home/user/Downloads"
+target_path="/home/user/Downloads/ThinClient/installs"
 target_name="VMware-Horizon-Client.bundle"
 source_path="https://download3.vmware.com/software/CART24FQ1_LIN64_2303"
 source_name="VMware-Horizon-Client-2303-8.9.0-21435420.x64.bundle"
