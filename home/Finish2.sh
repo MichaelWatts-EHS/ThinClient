@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "Run Finish2"
+echo "Running Finish2"
 
 # Cleanup the calling script
 #rm "/home/user/Downloads/Finish1.sh"
