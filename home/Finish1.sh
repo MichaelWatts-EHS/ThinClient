@@ -11,7 +11,7 @@ cd /home/user/Downloads
 echo "Downloading required files"
 
 # Get it & Run it (in terminal)
-#wget -q https://raw.githubusercontent.com/MichaelWatts-EHS/ThinClient/main/home/Finish1.sh; chmod a+x Finish1.sh; sh Finish1.sh
+#wget -q https://raw.githubusercontent.com/MichaelWatts-EHS/ThinClient/main/home/Finish1.sh; chmod a+x Finish1.sh; . Finish1.sh
 
 # Get ThinClient files from github
 echo "   + Configuration files"
