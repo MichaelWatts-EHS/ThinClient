@@ -19,10 +19,8 @@ git clone --quiet https://github.com/MichaelWatts-EHS/ThinClient.git ThinClient 
 rm ThinClient/README.md
 rm -f -R ThinClient/.git
 rm -f -R ThinClient/preseed
-#mkdir ThinClient/installs
 
 # Get the Pulse VPN Client
-echo "   + Pulse VPN Client"
 target_path="/home/user/Downloads/ThinClient/installs"
 target_name="ps-pulse-linux-installer.deb"
 source_path="https://application.ivanti.com/SSG/Clients"
@@ -30,7 +28,20 @@ source_name="ps-pulse-linux-9.1r11.4-b8575-64-bit-installer.deb"
 target_file="${target_path}/${target_name}"
 source_file="${source_path}/${source_name}"
 if [ ! -f $target_file ]; then
-  #echo "$target_name not found. Downloading"
+  echo "   + Pulse VPN Client"
+  wget -q $source_file -O $target_file
+fi
+chmod +x $target_file
+
+# Get the VMware Horizon Client
+target_path="/home/user/Downloads/ThinClient/installs"
+target_name="VMware-Horizon-Client.bundle"
+source_path="https://download3.vmware.com/software/CART24FQ1_LIN64_2303"
+source_name="VMware-Horizon-Client-2303-8.9.0-21435420.x64.bundle"
+target_file="${target_path}/${target_name}"
+source_file="${source_path}/${source_name}"
+if [ ! -f $target_file ]; then
+  echo "   + VMware Horizon Client"
   wget -q $source_file -O $target_file
 fi
 chmod +x $target_file
@@ -47,20 +58,6 @@ chmod +x $target_file
 #  wget -q $source_file -O $target_file
 #fi
 #chmod +x $target_file
-
-# Get the VMware Horizon Client
-echo "   + VMware Horizon Client"
-target_path="/home/user/Downloads/ThinClient/installs"
-target_name="VMware-Horizon-Client.bundle"
-source_path="https://download3.vmware.com/software/CART24FQ1_LIN64_2303"
-source_name="VMware-Horizon-Client-2303-8.9.0-21435420.x64.bundle"
-target_file="${target_path}/${target_name}"
-source_file="${source_path}/${source_name}"
-if [ ! -f $target_file ]; then
-  #echo "$target_name not found. Downloading"
-  wget -q $source_file -O $target_file
-fi
-chmod +x $target_file
 
 # Get the Finish2.sh script
 #target_path="/home/user/Downloads/ThinClient/home"
