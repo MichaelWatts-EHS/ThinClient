@@ -19,7 +19,7 @@ git clone --quiet https://github.com/MichaelWatts-EHS/ThinClient.git ThinClient 
 rm ThinClient/README.md
 rm -f -R ThinClient/.git
 rm -f -R ThinClient/preseed
-mkdir ThinClient/installs
+#mkdir ThinClient/installs
 
 # Get the Pulse VPN Client
 echo "   + Pulse VPN Client"
@@ -36,17 +36,17 @@ fi
 chmod +x $target_file
 
 # Get the Pulse VPN Configuration
-target_path="/home/user/Downloads/ThinClient/installs"
-target_name="EOTSS_Azure.pulsepreconfig"
-source_path="https://raw.githubusercontent.com/MichaelWatts-EHS/ThinClient/main/home/user/Downloads"
-source_name="EOTSS_Azure.pulsepreconfig"
-target_file="${target_path}/${target_name}"
-source_file="${source_path}/${source_name}"
-if [ ! -f $target_file ]; then
-  #echo "$target_name not found. Downloading"
-  wget -q $source_file -O $target_file
-fi
-chmod +x $target_file
+#target_path="/home/user/Downloads/ThinClient/installs"
+#target_name="EOTSS_Azure.pulsepreconfig"
+#source_path="https://raw.githubusercontent.com/MichaelWatts-EHS/ThinClient/main/home/user/Downloads"
+#source_name="EOTSS_Azure.pulsepreconfig"
+#target_file="${target_path}/${target_name}"
+#source_file="${source_path}/${source_name}"
+#if [ ! -f $target_file ]; then
+#  #echo "$target_name not found. Downloading"
+#  wget -q $source_file -O $target_file
+#fi
+#chmod +x $target_file
 
 # Get the VMware Horizon Client
 echo "   + VMware Horizon Client"
@@ -63,17 +63,17 @@ fi
 chmod +x $target_file
 
 # Get the Finish2.sh script
-target_path="/home/user/Downloads/ThinClient/home"
-target_name="Finish2.sh"
-source_path="https://raw.githubusercontent.com/MichaelWatts-EHS/ThinClient/main/home"
-source_name="Finish2.sh"
-target_file="${target_path}/${target_name}"
-source_file="${source_path}/${source_name}"
-if [ ! -f $target_file ]; then
-  #echo "$target_name not found. Downloading"
-  wget -q $source_file -O $target_file
-fi
-chmod +x $target_file
+#target_path="/home/user/Downloads/ThinClient/home"
+#target_name="Finish2.sh"
+#source_path="https://raw.githubusercontent.com/MichaelWatts-EHS/ThinClient/main/home"
+#source_name="Finish2.sh"
+#target_file="${target_path}/${target_name}"
+#source_file="${source_path}/${source_name}"
+#if [ ! -f $target_file ]; then
+#  #echo "$target_name not found. Downloading"
+#  wget -q $source_file -O $target_file
+#fi
+#chmod +x $target_file
 
 echo "Applying configuration files"
 cp -f -R ThinClient/home/user /home
