@@ -11,7 +11,7 @@ cd /home/user/Downloads
 echo "Downloading required files"
 
 # Get it & Run it (in terminal)
-#wget -q https://raw.githubusercontent.com/MichaelWatts-EHS/ThinClient/main/home/user/Desktop/Finish1.sh; chmod a+x Finish1.sh; sh Finish1.sh
+#wget -q https://raw.githubusercontent.com/MichaelWatts-EHS/ThinClient/main/home/Finish1.sh; chmod a+x Finish1.sh; sh Finish1.sh
 
 # Get ThinClient files from github
 echo "   + Configuration files"
@@ -63,10 +63,9 @@ fi
 chmod +x $target_file
 
 # Get the Finish2.sh script
-echo "   + Finish2 script"
-target_path="/home/user/Downloads/ThinClient"
+target_path="/home/user/Downloads/ThinClient/home"
 target_name="Finish2.sh"
-source_path="https://raw.githubusercontent.com/MichaelWatts-EHS/ThinClient/main/home/user/Downloads"
+source_path="https://raw.githubusercontent.com/MichaelWatts-EHS/ThinClient/main/home"
 source_name="Finish2.sh"
 target_file="${target_path}/${target_name}"
 source_file="${source_path}/${source_name}"
@@ -77,8 +76,8 @@ fi
 chmod +x $target_file
 
 cp -f -R ThinClient/home/user /home
-rm -f -R ThinClient/home
+rm -f -R ThinClient/home/user
 
 #read -n1 -r -p "So far so good.  Press any key to continue..."
-SCRIPT_PATH="/home/user/Downloads/ThinClient/Finish2.sh"
+SCRIPT_PATH="/home/user/Downloads/ThinClient/home/Finish2.sh"
 #echo "password" | sudo -S $SCRIPT_PATH >/dev/null
