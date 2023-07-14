@@ -2,26 +2,22 @@
 
 # This part should NOT be run as root
 
-# Get it & Run it (in terminal)
-# wget -q https://raw.githubusercontent.com/MichaelWatts-EHS/ThinClient/main/home/user/Desktop/Finish1.sh -O /home/user/Desktop/Finish1.sh; chmod a+x /home/user/Desktop/Finish1.sh; /home/user/Desktop/Finish1.sh
-
-cd /home/user/Downloads
-echo "Downloading required files"
+# Cleanup the desktop
 rm -f /home/user/Desktop/computer.desktop
 rm -f /home/user/Desktop/network.desktop
 rm -f /home/user/Desktop/trash-can.desktop
 rm -f /home/user/Desktop/user-home.desktop
+cd /home/user/Downloads
+echo "Downloading required files"
+
+# Get it & Run it (in terminal)
+#wget -q https://raw.githubusercontent.com/MichaelWatts-EHS/ThinClient/main/home/user/Desktop/Finish1.sh; chmod a+x Finish1.sh; sh Finish1.sh
+
+# Get ThinClient files from github
 git clone --quiet https://github.com/MichaelWatts-EHS/ThinClient.git ThinClient > /dev/null
 rm ThinClient/README.md
 rm -f -R ThinClient/.git
 rm -f -R ThinClient/preseed
-
-cp -f -R ThinClient/home/user/.config /home/user
-chmod a+x /home/user/.config/*.desktop
-cp -f -R ThinClient/home/user/.local /home/user
-cp -f -R ThinClient/home/user/Desktop /home/user
-cp -f -R ThinClient/home/user/Downloads /home/user
-rm -f -R ThinClient/home
 
 # Get the Pulse VPN Client
 target_path="/home/user/Downloads"
@@ -74,6 +70,13 @@ if [ ! -f $target_file ]; then
   wget -q $source_file -O $target_file
 fi
 chmod +x $target_file
+
+#cp -f -R ThinClient/home/user/.config /home/user
+#chmod a+x /home/user/.config/*.desktop
+#cp -f -R ThinClient/home/user/.local /home/user
+#cp -f -R ThinClient/home/user/Desktop /home/user
+#cp -f -R ThinClient/home/user/Downloads /home/user
+#rm -f -R ThinClient/home
 
 #read -n1 -r -p "So far so good.  Press any key to continue..."
 SCRIPT_PATH="/home/user/Downloads/Finish2.sh"
