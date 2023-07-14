@@ -41,7 +41,7 @@ echo "y" | '/home/user/Downloads/ThinClient/installs/VMware-Horizon-Client.bundl
 #rm '/home/user/Downloads/EOTSS_Azure.pulsepreconfig' >/dev/null
 rm -f -R /home/user/Downloads/ThinClient/installs
 
-read -n 1 -r -p "So far so good.  Press any key to reboot ..."
+apt -y remove wget git zutty qlipper pulseaudio featherpad pcmanfm-qt qps
 
 # Reboot
 systemctl --no-wall reboot
