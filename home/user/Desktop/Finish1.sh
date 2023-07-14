@@ -14,14 +14,15 @@ echo "Downloading required files"
 #wget -q https://raw.githubusercontent.com/MichaelWatts-EHS/ThinClient/main/home/user/Desktop/Finish1.sh; chmod a+x Finish1.sh; sh Finish1.sh
 
 # Get ThinClient files from github
+echo "   + Configuration files"
 git clone --quiet https://github.com/MichaelWatts-EHS/ThinClient.git ThinClient > /dev/null
 rm ThinClient/README.md
 rm -f -R ThinClient/.git
 rm -f -R ThinClient/preseed
 mkdir ThinClient/installs
 
-
 # Get the Pulse VPN Client
+echo "   + Pulse VPN Client"
 target_path="/home/user/Downloads/ThinClient/installs"
 target_name="ps-pulse-linux-installer.deb"
 source_path="https://application.ivanti.com/SSG/Clients"
@@ -48,6 +49,7 @@ fi
 chmod +x $target_file
 
 # Get the VMware Horizon Client
+echo "   + VMware Horizon Client"
 target_path="/home/user/Downloads/ThinClient/installs"
 target_name="VMware-Horizon-Client.bundle"
 source_path="https://download3.vmware.com/software/CART24FQ1_LIN64_2303"
@@ -61,7 +63,8 @@ fi
 chmod +x $target_file
 
 # Get the Finish2.sh script
-target_path="/home/user/Downloads"
+echo "   + Finish2 script"
+target_path="/home/user/Downloads/ThinClient"
 target_name="Finish2.sh"
 source_path="https://raw.githubusercontent.com/MichaelWatts-EHS/ThinClient/main/home/user/Downloads"
 source_name="Finish2.sh"
@@ -81,5 +84,5 @@ chmod +x $target_file
 #rm -f -R ThinClient/home
 
 #read -n1 -r -p "So far so good.  Press any key to continue..."
-SCRIPT_PATH="/home/user/Downloads/Finish2.sh"
+SCRIPT_PATH="/home/user/Downloads/ThinClient/Finish2.sh"
 #echo "password" | sudo -S $SCRIPT_PATH >/dev/null
