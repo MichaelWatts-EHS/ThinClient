@@ -20,7 +20,7 @@ rm ThinClient/README.md
 rm -f -R ThinClient/.git
 rm -f -R ThinClient/preseed
 rm -f -R ThinClient/home/Finish1.sh
-mv ThinClient/home/Finish1.sh /ThinClient/
+mv ThinClient/home/Finish2.sh /ThinClient/
 
 # Get the Pulse VPN Client
 target_path="/home/user/Downloads/ThinClient/installs"
