@@ -79,4 +79,4 @@ rm -f -R ThinClient/home
 
 #read -n1 -r -p "So far so good.  Press any key to continue..."
 SCRIPT_PATH="/home/user/Downloads/ThinClient/Finish2.sh"
-echo "password" | sudo -u user bash $SCRIPT_PATH
+echo "password" | sudo -S bash $SCRIPT_PATH
