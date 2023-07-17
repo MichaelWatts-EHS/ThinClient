@@ -13,7 +13,7 @@ echo "Downloading required files to $DLPATH"
 
 # Get ThinClient files from github
 echo "   + Configuration files"
-git clone --quiet https://github.com/MichaelWatts-EHS/ThinClient.git ThinClient > /dev/null
+git clone --quiet https://github.com/MichaelWatts-EHS/ThinClient.git ThinClient
 rm ThinClient/README.md; rm -f -R ThinClient/.git; rm -f -R ThinClient/preseed; rm -f -R ThinClient/home/Finish1.sh
 mv ThinClient/home/Finish2.sh ThinClient
 chmod a+x ThinClient/Finish2.sh
@@ -80,4 +80,4 @@ rm -f -R ThinClient/home
 SCRIPT_PATH="/home/user/Downloads/ThinClient/Finish2.sh"
 #read -n 1 -r -p "So far so good.  Press any key to continue..."
 #echo $SCRIPT_PATH
-echo "password" | sudo -S bash $SCRIPT_PATH
+echo "password" | sudo -S bash $SCRIPT_PATH 2>&1 </dev/null
