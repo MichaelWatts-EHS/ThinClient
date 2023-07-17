@@ -44,19 +44,16 @@ echo "y" | '/home/user/Downloads/ThinClient/installs/VMware-Horizon-Client.bundl
 
 # Cleanup
 rm -f -R /home/user/Downloads/ThinClient/installs
-apt -y remove wget git zutty qlipper pulseaudio qps xarchiver #lximage-qt qterminal featherpad pcmanfm-qt
+apt -y remove wget zutty qlipper pulseaudio qps xarchiver #lximage-qt qterminal featherpad pcmanfm-qt git
 apt -y autoremove
 
 
-# Install pre-reqs for MakeDistro
+# Install pre-reqs for Linux-Live kit
 apt -y install squashfs-tools mkisofs
-cp -f -R /home/user/Downloads/ThinClient/tmp /
-rm -f -R /home/user/Downloads/ThinClient/tmp
-chmod -R +x /tmp/MakeDistro
-cd /tmp/MakeDistro
+git clone --quiet https://github.com/Tomas-M/linux-live.git /tmp/Linux-Live
+chmod -R +x /tmp/Linux-Live
+cd /tmp/Linux-Live
 
-#/tmp/MakeDistro/tools/isolinux.bin.update
-#/tmp/MakeDistro/build
 
 
 
