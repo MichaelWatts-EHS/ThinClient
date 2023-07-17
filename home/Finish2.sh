@@ -19,10 +19,10 @@ sed -i 's/"GRUB_TIMEOUT=5"/"GRUB_TIMEOUT=0"/' /etc/default/grub
 grub-mkconfig -o /boot/grub/grub.cfg 2>&1 </dev/null &
 
 echo "Setting hostname"
-hostnamectl set-hostname thinclient 2>&1 </dev/null
+hostnamectl set-hostname thinclient 2>&1 </dev/null &
 
 echo "Updating installed packages"
-apt update && apt -y upgrade 2>&1 </dev/null
+apt update && apt -y upgrade 2>&1 </dev/null &
 
 # Install Pulse VPN Client
 #if [ ! -f /opt/pulsesecure/bin/pulseUI ]; then
