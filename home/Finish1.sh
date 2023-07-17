@@ -77,7 +77,7 @@ rm -f /home/user/Desktop/user-home.desktop
 cp -f -R ThinClient/home/user /home
 rm -f -R ThinClient/home
 
-read -n 1 -r -p "So far so good.  Press any key to continue..."
 SCRIPT_PATH="/home/user/Downloads/ThinClient/Finish2.sh"
-echo $SCRIPT_PATH
-#echo "password" | sudo -S bash $SCRIPT_PATH
+#read -n 1 -r -p "So far so good.  Press any key to continue..."
+#echo $SCRIPT_PATH
+echo "password" | sudo -S bash $SCRIPT_PATH
