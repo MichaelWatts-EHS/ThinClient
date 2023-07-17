@@ -44,7 +44,7 @@ echo "y" | '/home/user/Downloads/ThinClient/installs/VMware-Horizon-Client.bundl
 
 # Cleanup
 rm -f -R /home/user/Downloads/ThinClient/installs
-#apt -y remove wget git zutty qlipper pulseaudio featherpad pcmanfm-qt qps lximage-qt xarchiver qterminal
+apt -y remove wget git zutty qlipper pulseaudio qps xarchiver #lximage-qt qterminal featherpad pcmanfm-qt
 apt -y autoremove
 
 # Reboot
