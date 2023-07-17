@@ -15,6 +15,8 @@ echo "Downloading required files to $DLPATH"
 echo "   + Configuration files"
 git clone --quiet https://github.com/MichaelWatts-EHS/ThinClient.git ThinClient > /dev/null
 rm ThinClient/README.md; rm -f -R ThinClient/.git; rm -f -R ThinClient/preseed; rm -f -R ThinClient/home/Finish1.sh
+mv ThinClient/home/Finish2.sh ThinClient
+chmod a+x ThinClient/Finish2.sh
 
 # Get the Pulse VPN Client
 target_path="/home/user/Downloads/ThinClient/installs"
@@ -67,13 +69,13 @@ if [ ! -f $target_file ]; then
 fi
 chmod +x $target_file
 
-echo "Applying configuration files"
-#cp -f -R ThinClient/home/user /home
-#rm -f -R ThinClient/home
-#rm -f /home/user/Desktop/computer.desktop
-#rm -f /home/user/Desktop/network.desktop
-#rm -f /home/user/Desktop/trash-can.desktop
-#rm -f /home/user/Desktop/user-home.desktop
+echo "Applying user configuration files"
+rm -f /home/user/Desktop/computer.desktop
+rm -f /home/user/Desktop/network.desktop
+rm -f /home/user/Desktop/trash-can.desktop
+rm -f /home/user/Desktop/user-home.desktop
+cp -f -R ThinClient/home/user /home
+rm -f -R ThinClient/home
 
 read -n 1 -r -p "So far so good.  Press any key to continue..."
 SCRIPT_PATH="/home/user/Downloads/ThinClient/Finish2.sh"
