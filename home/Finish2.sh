@@ -22,7 +22,7 @@ echo "Setting hostname"
 hostnamectl set-hostname thinclient 2>&1 </dev/null &
 
 echo "Updating installed packages"
-apt update && apt -y upgrade 2>&1 </dev/null &
+apt update && apt -y upgrade 2>&1 </dev/null
 
 # Install Pulse VPN Client
 #if [ ! -f /opt/pulsesecure/bin/pulseUI ]; then
