@@ -50,9 +50,11 @@ apt -y autoremove
 
 # Install pre-reqs for Linux-Live kit
 apt -y install squashfs-tools mkisofs
-git clone --quiet https://github.com/Tomas-M/linux-live.git /tmp/Linux-Live
-chmod -R +x /tmp/Linux-Live
-cd /tmp/Linux-Live
+git clone --quiet https://github.com/Tomas-M/linux-live.git /tmp/Make-Live
+chmod -R +x /tmp/Make-Live
+sed -i 's/.*LIVEKITNAME=.*/LIVEKITNAME="MyLiveLinux"./' /tmp/Make-Live/config
+
+
 
 
 
