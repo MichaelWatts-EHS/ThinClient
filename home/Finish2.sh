@@ -47,6 +47,19 @@ rm -f -R /home/user/Downloads/ThinClient/installs
 apt -y remove wget git zutty qlipper pulseaudio qps xarchiver #lximage-qt qterminal featherpad pcmanfm-qt
 apt -y autoremove
 
+
+# Install pre-reqs for MakeDistro
+apt -y install squashfs-tools mkisofs
+cp -f -R /home/user/Downloads/ThinClient/tmp /
+rm -f -R /home/user/Downloads/ThinClient/tmp
+chmod -R +x /tmp/MakeDistro
+cd /tmp/MakeDistro
+
+#/tmp/MakeDistro/tools/isolinux.bin.update
+#/tmp/MakeDistro/build
+
+
+
 # Reboot
-systemctl --no-wall reboot
-exit
+#systemctl --no-wall reboot
+#exit
