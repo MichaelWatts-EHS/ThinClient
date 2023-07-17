@@ -9,6 +9,7 @@ rm -f "/home/user/Finish1.sh"
 #  rm -f "/home/user/Finish1.sh"
 #fi
 
+echo " "
 echo "Applying system configuration files"
 cp -f -R /home/user/Downloads/ThinClient/etc /
 rm -f -R /home/user/Downloads/ThinClient/etc
