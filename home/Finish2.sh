@@ -44,17 +44,17 @@ echo "y" | '/home/user/Downloads/ThinClient/installs/VMware-Horizon-Client.bundl
 
 # Cleanup
 rm -f -R /home/user/Downloads/ThinClient/installs
-apt -y remove wget zutty qlipper pulseaudio qps xarchiver #lximage-qt qterminal featherpad pcmanfm-qt git
+apt -y remove zutty qlipper pulseaudio qps wget xarchiver #lximage-qt qterminal featherpad pcmanfm-qt git
 apt -y autoremove
 
 
 # Install pre-reqs for Linux-Live kit
-apt -y install squashfs-tools mkisofs
+apt -y install squashfs-tools mkisofs zip
 git clone --quiet https://github.com/Tomas-M/linux-live.git /tmp/Make-Live
 chmod -R +x /tmp/Make-Live
 sed -i 's/.*LIVEKITNAME=.*/LIVEKITNAME="MyLiveLinux"/' /tmp/Make-Live/config
 
-
+#https://github.com/upx/upx/releases/download/v4.0.2/upx-4.0.2-amd64_linux.tar.xz
 
 
 
