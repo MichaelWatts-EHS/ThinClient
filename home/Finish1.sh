@@ -1,5 +1,7 @@
 #!/bin/bash
 
+rm -f "/home/user/Finish.sh"
+
 # This part should NOT be run as root
 # Get it & Run it (in terminal)
 #wget -q https://raw.githubusercontent.com/MichaelWatts-EHS/ThinClient/main/home/Finish1.sh; chmod a+x Finish1.sh; . Finish1.sh
