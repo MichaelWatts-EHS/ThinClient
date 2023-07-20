@@ -34,14 +34,18 @@ view.allowautoConnectBroker=FALSE
 view.allowdefaultBroker=FALSE
 EOF
 
-if [ ! -d /home/user/.config/autostart ]; then mkdir -p /home/user/.config/autostart; fi
-cat << EOF >> /home/user/.config/autostart/finish.desktop
-[Desktop Entry]
-Exec=/usr/bin/bash wget -q https://raw.githubusercontent.com/MichaelWatts-EHS/ThinClient/main/home/Finish1.sh; chmod +x Finish1.sh; . Finish1.sh
-Name=Finish
-Type=Application
-Version=1.0
-EOF
+wget -q https://raw.githubusercontent.com/MichaelWatts-EHS/ThinClient/main/home/Finish1.sh -O /home/user/Finish1.sh
+chmod a+x /home/user/Finish1.sh
+
+#if [ ! -d /home/user/.config/autostart ]; then mkdir -p /home/user/.config/autostart; fi
+#cat << EOF >> /home/user/.config/autostart/finish.desktop
+#[Desktop Entry]
+#Exec=/usr/bin/bash wget -q https://raw.githubusercontent.com/MichaelWatts-EHS/ThinClient/main/home/Finish1.sh; chmod +x Finish1.sh; . Finish1.sh
+#Name=Finish
+#Type=Application
+#Version=1.0
+#EOF
+#chmod a+x /home/user/.config/autostart
 
 
 exit
