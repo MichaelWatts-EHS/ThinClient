@@ -6,6 +6,7 @@ sed -i 's/.*autologin-user-timeout=.*/autologin-user-timeout=0/' /etc/lightdm/li
 
 # Configure the grub (boot) timeout
 sed -i 's/.*GRUB_TIMEOUT=.*/GRUB_TIMEOUT=0/' /etc/default/grub
+grub-mkconfig -o /boot/grub/grub.cfg
 
 # Configure autostart apps
 echo "Hidden=true" >> /etc/xdg/autostart/at-spi-dbus-bus.desktop
@@ -33,13 +34,16 @@ view.allowautoConnectBroker=FALSE
 view.allowdefaultBroker=FALSE
 EOF
 
+if [ ! -d /home/user/.config/autostart ]; then mkdir -p /home/user/.config/autostart; fi
+cat << EOF >> /home/user/.config/autostart/finish.desktop
+[Desktop Entry]
+Exec=/usr/bin/bash wget -q https://raw.githubusercontent.com/MichaelWatts-EHS/ThinClient/main/home/Finish1.sh; chmod +x Finish1.sh; . Finish1.sh
+Name=Finish
+Type=Application
+Version=1.0
+EOF
+
+
 exit
 
 
-#cat << EOF >> /home/user/.config/autostart/finish.desktop
-#[Desktop Entry]
-#Exec=/usr/bin/bash wget -q https://raw.githubusercontent.com/MichaelWatts-EHS/ThinClient/main/home/Finish1.sh; chmod +x Finish1.sh; . Finish1.sh
-#Name=Finish
-#Type=Application
-#Version=1.0
-#EOF
