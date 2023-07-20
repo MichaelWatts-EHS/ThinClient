@@ -8,11 +8,11 @@ sed -i 's/.*autologin-user-timeout=.*/autologin-user-timeout=0/' /etc/lightdm/li
 sed -i 's/.*GRUB_TIMEOUT=.*/GRUB_TIMEOUT=0/' /etc/default/grub
 
 # Configure autostart apps
-"Hidden=true" | tee -a /etc/xdg/autostart/at-spi-dbus-bus.desktop
-"Hidden=true" | tee -a /etc/xdg/autostart/print-applet.desktop
-"Hidden=true" | tee -a /etc/xdg/autostart/pulseaudio.desktop
-"Hidden=true" | tee -a /etc/xdg/autostart/lxqt-qlipper-autostart.desktop
-"Hidden=true" | tee -a /etc/xdg/autostart/lxqt-xscreensaver-autostart.desktop
+echo "Hidden=true" >> /etc/xdg/autostart/at-spi-dbus-bus.desktop
+echo "Hidden=true" >> /etc/xdg/autostart/print-applet.desktop
+echo "Hidden=true" >> /etc/xdg/autostart/pulseaudio.desktop
+echo "Hidden=true" >> /etc/xdg/autostart/lxqt-qlipper-autostart.desktop
+echo "Hidden=true" >> /etc/xdg/autostart/lxqt-xscreensaver-autostart.desktop
 
 
 #cat << EOF >> /home/user/.config/autostart/finish.desktop
