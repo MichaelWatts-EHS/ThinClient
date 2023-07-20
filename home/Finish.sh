@@ -8,11 +8,32 @@ sed -i 's/.*autologin-user-timeout=.*/autologin-user-timeout=0/' /etc/lightdm/li
 sed -i 's/.*GRUB_TIMEOUT=.*/GRUB_TIMEOUT=0/' /etc/default/grub
 
 # Configure autostart apps
-echo "Hidden=true" >> /etc/xdg/autostart/at-spi-dbus-bus.desktop
-echo "Hidden=true" >> /etc/xdg/autostart/print-applet.desktop
-echo "Hidden=true" >> /etc/xdg/autostart/pulseaudio.desktop
-echo "Hidden=true" >> /etc/xdg/autostart/lxqt-qlipper-autostart.desktop
-echo "Hidden=true" >> /etc/xdg/autostart/lxqt-xscreensaver-autostart.desktop
+"Hidden=true" | tee -a /etc/xdg/autostart/at-spi-dbus-bus.desktop
+"Hidden=true" | tee -a /etc/xdg/autostart/print-applet.desktop
+"Hidden=true" | tee -a /etc/xdg/autostart/pulseaudio.desktop
+"Hidden=true" | tee -a /etc/xdg/autostart/lxqt-qlipper-autostart.desktop
+"Hidden=true" | tee -a /etc/xdg/autostart/lxqt-xscreensaver-autostart.desktop
+
+if [ ! -d /etc/vmware ]; then mkdir -p /etc/vmware; fi
+cat << EOF >> /etc/vmware/view-default-config
+view.autoConnectBroker="vdi.ehs.govt.state.ma.us"
+view.defaultBroker="vdi.ehs.govt.state.ma.us"
+view.defaultDesktop="Standard Desktop"
+view.hideClientAfterLaunchSession=TRUE
+view.autoConnectDesktop=TRUE
+view.autoHideToolbar=TRUE
+view.fullScreen=TRUE
+view.nomenubar=TRUE
+view.once=TRUE
+view.defaultDomain=EHS
+view.usbAutoConnectOnInsert=TRUE
+EOF
+cat << EOF >> /etc/vmware/view-mandatory-config
+view.allowautoConnectBroker=FALSE
+view.allowdefaultBroker=FALSE
+EOF
+
+exit
 
 
 #cat << EOF >> /home/user/.config/autostart/finish.desktop
