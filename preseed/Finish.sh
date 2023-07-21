@@ -19,8 +19,16 @@ echo "Hidden=true" >> /etc/xdg/autostart/lxqt-xscreensaver-autostart.desktop
 if [ ! -d /tmp/ThinClient/installs ]; then mkdir -p /tmp/ThinClient/installs; fi; cd /tmp/ThinClient/installs
 
 ### Downloads
+vpnconfig_url="https://github.com/MichaelWatts-EHS/ThinClient/blob/main/preseed/EOTSS_Azure.pulsepreconfig"
 vpnclient_url="https://application.ivanti.com/SSG/Clients/ps-pulse-linux-9.1r11.4-b8575-64-bit-installer.deb"
 vdiclient_url="https://download3.vmware.com/software/CART24FQ2_LIN64_DebPkg_2306/VMware-Horizon-Client-2306-8.10.0-21964631.x64.deb"
+
+vpnconfig_file=EOTSS_Azure.pulsepreconfig
+if [ -f /cdrom/preseed/$vpnconfig_file ]; then
+  cp /cdrom/preseed/$vpnconfig_file ./$vpnconfig_file
+else
+  wget $vpnconfig_url -O $vpnconfig_file
+fi
 
 vpnclient_file=ps-pulse-linux-installer.deb
 if [ -f /cdrom/preseed/$vpnclient_file ]; then
@@ -48,6 +56,10 @@ fi
 if [ ! -f /opt/pulsesecure/lib/cefRuntime/Release/libcef.so ]; then
   /opt/pulsesecure/bin/setup_cef.sh install
 fi
+if [ -f /tmp/ThinClient/installs/EOTSS_Azure.pulsepreconfig ]; then
+  /opt/pulsesecure/bin/jamCommand /importfile /tmp/ThinClient/installs/EOTSS_Azure.pulsepreconfig
+fi
+
 
 
 # VMware Horizon View Client
@@ -74,7 +86,10 @@ view.allowdefaultBroker=FALSE
 EOF
 
 
-
+# Prep and run the final step
+wget https://github.com/MichaelWatts-EHS/ThinClient/blob/main/preseed/FinishU.sh -O /tmp/FinishU.sh
+chmod a+x /tmp/FinishU.sh
+#/tmp/FinishU.sh
 
 
 exit
