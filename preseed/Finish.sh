@@ -15,45 +15,45 @@ echo "Hidden=true" >> /etc/xdg/autostart/pulseaudio.desktop
 echo "Hidden=true" >> /etc/xdg/autostart/lxqt-qlipper-autostart.desktop
 echo "Hidden=true" >> /etc/xdg/autostart/lxqt-xscreensaver-autostart.desktop
 
-# Set the hostname
-#hostnamectl set-hostname thinclient
+# Create the working directory if it doesn't exist
+if [ ! -d /tmp/ThinClient/installs ]; then mkdir -p /tmp/ThinClient/installs; fi; cd /tmp/ThinClient/installs
 
 ### Downloads
-# Make the working directory if it doesn't exist
-if [ ! -d /tmp/ThinClient/installs ]; then mkdir -p /tmp/ThinClient/installs; fi
+vpnclient_url="https://application.ivanti.com/SSG/Clients/ps-pulse-linux-9.1r11.4-b8575-64-bit-installer.deb"
+vdiclient_url="https://download3.vmware.com/software/CART24FQ2_LIN64_DebPkg_2306/VMware-Horizon-Client-2306-8.10.0-21964631.x64.deb"
 
-# Download the required files
-source_file="https://raw.githubusercontent.com/MichaelWatts-EHS/ThinClient/main/installs/EOTSS_Azure.pulsepreconfig"
-target_file="/tmp/ThinClient/installs/EOTSS_Azure.pulsepreconfig"
-wget -q $source_file -O $target_file
+vpnclient_file=ps-pulse-linux-installer.deb
+if [ -f /cdrom/preseed/$vpnclient_file ]; then
+  cp /cdrom/preseed/$vpnclient_file ./$vpnclient_file
+else
+  wget $vpnclient_url -O $vpnclient_file
+fi
 
-source_file="https://application.ivanti.com/SSG/Clients/ps-pulse-linux-installer.deb"
-target_file="/tmp/ThinClient/installs/ps-pulse-linux-installer.deb"
-wget -q $source_file -O $target_file
+vdiclient_file=VMware-Horizon-Client.deb
+if [ -f /cdrom/preseed/$vdiclient_file ]; then
+  cp /cdrom/preseed/$vdiclient_file ./$vdiclient_file
+else
+  wget $vdiclient_url -O $vdiclient_file
+fi
 
-source_file="https://download3.vmware.com/software/CART24FQ1_LIN64_2303/VMware-Horizon-Client.bundle"
-target_file="/tmp/ThinClient/installs/VMware-Horizon-Client.bundle"
-wget -q $source_file -O $target_file
 
-# Make them exectuable
-chmod -R a+x /tmp/ThinClient/installs
 
 ### Installs
-# Install Pulse VPN Client
+chmod -R a+x /tmp/ThinClient/installs
+
+# VPN Client
 if [ ! -f /opt/pulsesecure/bin/pulseUI ]; then
-  apt -y install '/tmp/ThinClient/installs/ps-pulse-linux-installer.deb'
+  apt install ./$vpnclient_file -y
 fi
 if [ ! -f /opt/pulsesecure/lib/cefRuntime/Release/libcef.so ]; then
   /opt/pulsesecure/bin/setup_cef.sh install
 fi
-if [ -f /opt/pulsesecure/bin/pulseUI ]; then
-  /opt/pulsesecure/bin/jamCommand /importfile /tmp/ThinClient/installs/EOTSS_Azure.pulsepreconfig
-fi
 
-# Install the VMware Horizon View Client
-echo "y" | '/tmp/ThinClient/installs/VMware-Horizon-Client.bundle' --console --required --stop-services
 
-# Configure the Horizon Client
+# VMware Horizon View Client
+apt install libudev0 -y
+apt install ./$vdiclient_file -y
+#echo "y" | ./$vdiclient_file --console --required --stop-services
 if [ ! -d /etc/vmware ]; then mkdir -p /etc/vmware; fi
 cat << EOF >> /etc/vmware/view-default-config
 view.autoConnectBroker="vdi.ehs.govt.state.ma.us"
@@ -72,6 +72,9 @@ cat << EOF >> /etc/vmware/view-mandatory-config
 view.allowautoConnectBroker=FALSE
 view.allowdefaultBroker=FALSE
 EOF
+
+
+
 
 
 exit
