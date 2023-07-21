@@ -13,12 +13,19 @@ grub-mkconfig -o /boot/grub/grub.cfg
 sed -i 's/.*autologin-user=.*/autologin-user=user/' /etc/lightdm/lightdm.conf
 sed -i 's/.*autologin-user-timeout=.*/autologin-user-timeout=0/' /etc/lightdm/lightdm.conf
 
-# Configure (disable) autostart apps
+# Configure (disable) autostart and desktop apps
 echo "Hidden=true" >> /etc/xdg/autostart/at-spi-dbus-bus.desktop
 echo "Hidden=true" >> /etc/xdg/autostart/print-applet.desktop
 echo "Hidden=true" >> /etc/xdg/autostart/pulseaudio.desktop
 echo "Hidden=true" >> /etc/xdg/autostart/lxqt-qlipper-autostart.desktop
 echo "Hidden=true" >> /etc/xdg/autostart/lxqt-xscreensaver-autostart.desktop
+echo "NoDisplay=true" >> /usr/share/applications/lxqt-hibernate.desktop
+echo "NoDisplay=true" >> /usr/share/applications/lxqt-leave.desktop
+echo "NoDisplay=true" >> /usr/share/applications/lxqt-lockscreen.desktop
+echo "NoDisplay=true" >> /usr/share/applications/lxqt-logout.desktop
+echo "NoDisplay=true" >> /usr/share/applications/lxqt-reboot.desktop
+echo "NoDisplay=true" >> /usr/share/applications/lxqt-suspend.desktop
+
 
 # Create the working directory if it doesn't exist
 if [ ! -d /tmp/ThinClient/installs ]; then mkdir -p /tmp/ThinClient/installs; fi; cd /tmp/ThinClient/installs
@@ -86,9 +93,12 @@ cat << EOF >> /etc/vmware/view-mandatory-config
 view.allowautoConnectBroker=FALSE
 view.allowdefaultBroker=FALSE
 EOF
+sed -i 's/.*Exec=.*/Exec=vmware-view --fullscreen/' /usr/share/applications/vmware-view.desktop
 
 
-# Prep and run the final step
+
+
+# Prep the final step
 finishU_file=FinishU.sh
 if [ -f /cdrom/preseed/$finishU_file ]; then
   cp /cdrom/preseed/$finishU_file /home/user/$finishU_file
@@ -96,6 +106,10 @@ else
   wget https://raw.githubusercontent.com/MichaelWatts-EHS/ThinClient/main/preseed/FinishU.sh -O /home/user/$finishU_file
 fi
 chmod a+x /home/user/$finishU_file
+
+# Cleanup
+#apt -y remove zutty qlipper pulseaudio qps xarchiver #lximage-qt qterminal featherpad pcmanfm-qt
+apt -y autoremove
 
 
 exit
