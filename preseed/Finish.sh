@@ -1,5 +1,10 @@
 #!/bin/bash
 
+### Variables
+vpnclient_url="https://application.ivanti.com/SSG/Clients/ps-pulse-linux-9.1r11.4-b8575-64-bit-installer.deb"
+vdiclient_url="https://download3.vmware.com/software/CART24FQ2_LIN64_DebPkg_2306/VMware-Horizon-Client-2306-8.10.0-21964631.x64.deb"
+
+
 # Configure the grub (boot) timeout
 sed -i 's/.*GRUB_TIMEOUT=.*/GRUB_TIMEOUT=0/' /etc/default/grub
 grub-mkconfig -o /boot/grub/grub.cfg
@@ -18,15 +23,12 @@ echo "Hidden=true" >> /etc/xdg/autostart/lxqt-xscreensaver-autostart.desktop
 # Create the working directory if it doesn't exist
 if [ ! -d /tmp/ThinClient/installs ]; then mkdir -p /tmp/ThinClient/installs; fi; cd /tmp/ThinClient/installs
 
-### Downloads
-vpnconfig_url="https://github.com/MichaelWatts-EHS/ThinClient/blob/main/preseed/EOTSS_Azure.pulsepreconfig"
-vpnclient_url="https://application.ivanti.com/SSG/Clients/ps-pulse-linux-9.1r11.4-b8575-64-bit-installer.deb"
-vdiclient_url="https://download3.vmware.com/software/CART24FQ2_LIN64_DebPkg_2306/VMware-Horizon-Client-2306-8.10.0-21964631.x64.deb"
-
+### Download required install files
 vpnconfig_file=EOTSS_Azure.pulsepreconfig
 if [ -f /cdrom/preseed/$vpnconfig_file ]; then
   cp /cdrom/preseed/$vpnconfig_file ./$vpnconfig_file
 else
+  vpnconfig_url="https://github.com/MichaelWatts-EHS/ThinClient/blob/main/preseed/EOTSS_Azure.pulsepreconfig"
   wget $vpnconfig_url -O $vpnconfig_file
 fi
 
@@ -44,10 +46,10 @@ else
   wget $vdiclient_url -O $vdiclient_file
 fi
 
-
+# Make them all executable
+chmod -R a+x /tmp/ThinClient/installs
 
 ### Installs
-chmod -R a+x /tmp/ThinClient/installs
 
 # VPN Client
 if [ ! -f /opt/pulsesecure/bin/pulseUI ]; then
@@ -87,9 +89,14 @@ EOF
 
 
 # Prep and run the final step
-wget https://github.com/MichaelWatts-EHS/ThinClient/blob/main/preseed/FinishU.sh -O /tmp/FinishU.sh
-chmod a+x /tmp/FinishU.sh
-#/tmp/FinishU.sh
+finishU_file=FinishU.sh
+if [ -f /cdrom/preseed/$finishU_file ]; then
+  cp /cdrom/preseed/$finishU_file /home/user/$finishU_file
+else
+  vpnconfig_url="https://github.com/MichaelWatts-EHS/ThinClient/blob/main/preseed/FinishU.sh"
+  wget https://github.com/MichaelWatts-EHS/ThinClient/blob/main/preseed/FinishU.sh -O /home/user/$finishU_file
+fi
+chmod a+x /home/user/$finishU_file
 
 
 exit
