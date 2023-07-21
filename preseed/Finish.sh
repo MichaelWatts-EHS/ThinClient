@@ -28,7 +28,7 @@ vpnconfig_file=EOTSS_Azure.pulsepreconfig
 if [ -f /cdrom/preseed/$vpnconfig_file ]; then
   cp /cdrom/preseed/$vpnconfig_file ./$vpnconfig_file
 else
-  vpnconfig_url="https://github.com/MichaelWatts-EHS/ThinClient/blob/main/preseed/EOTSS_Azure.pulsepreconfig"
+  vpnconfig_url="https://raw.githubusercontent.com/MichaelWatts-EHS/ThinClient/main/preseed/EOTSS_Azure.pulsepreconfig"
   wget $vpnconfig_url -O $vpnconfig_file
 fi
 
@@ -93,8 +93,7 @@ finishU_file=FinishU.sh
 if [ -f /cdrom/preseed/$finishU_file ]; then
   cp /cdrom/preseed/$finishU_file /home/user/$finishU_file
 else
-  vpnconfig_url="https://github.com/MichaelWatts-EHS/ThinClient/blob/main/preseed/FinishU.sh"
-  wget https://github.com/MichaelWatts-EHS/ThinClient/blob/main/preseed/FinishU.sh -O /home/user/$finishU_file
+  wget https://raw.githubusercontent.com/MichaelWatts-EHS/ThinClient/main/preseed/FinishU.sh -O /home/user/$finishU_file
 fi
 chmod a+x /home/user/$finishU_file
 
