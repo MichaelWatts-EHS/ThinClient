@@ -25,7 +25,8 @@ echo "NoDisplay=true" >> /usr/share/applications/lxqt-lockscreen.desktop
 echo "NoDisplay=true" >> /usr/share/applications/lxqt-logout.desktop
 echo "NoDisplay=true" >> /usr/share/applications/lxqt-reboot.desktop
 echo "NoDisplay=true" >> /usr/share/applications/lxqt-suspend.desktop
-
+sed -i 's/.*Exec=.*/Exec=systemctl poweroff --quiet/' /usr/share/applications/lxqt-shutdown.desktop
+wget https://raw.githubusercontent.com/MichaelWatts-EHS/ThinClient/main/preseed/panel.conf -O /etc/xdg/lxqt/panel.conf
 
 # Create the working directory if it doesn't exist
 if [ ! -d /tmp/ThinClient/installs ]; then mkdir -p /tmp/ThinClient/installs; fi; cd /tmp/ThinClient/installs
