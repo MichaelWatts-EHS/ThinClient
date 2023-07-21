@@ -27,6 +27,17 @@ echo "NoDisplay=true" >> /usr/share/applications/lxqt-reboot.desktop
 echo "NoDisplay=true" >> /usr/share/applications/lxqt-suspend.desktop
 sed -i 's/.*Exec=.*/Exec=systemctl poweroff --quiet/' /usr/share/applications/lxqt-shutdown.desktop
 wget https://raw.githubusercontent.com/MichaelWatts-EHS/ThinClient/main/preseed/panel.conf -O /etc/xdg/lxqt/panel.conf
+cd /usr/share/applications
+rm -f lximage-qt.desktop
+rm -f lxqt-about.desktop
+rm -f pavucontrol-qt.desktop
+rm -f qlipper.desktop
+rm -f qps.desktop
+rm -f qterminal-drop.desktop
+rm -f xarchiver.desktop
+rm -f zutty.desktop
+
+
 
 # Create the working directory if it doesn't exist
 if [ ! -d /tmp/ThinClient/installs ]; then mkdir -p /tmp/ThinClient/installs; fi; cd /tmp/ThinClient/installs
