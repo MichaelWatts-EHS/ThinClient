@@ -26,6 +26,8 @@ echo "NoDisplay=true" >> /usr/share/applications/lxqt-logout.desktop
 echo "NoDisplay=true" >> /usr/share/applications/lxqt-reboot.desktop
 echo "NoDisplay=true" >> /usr/share/applications/lxqt-suspend.desktop
 sed -i 's/.*Exec=.*/Exec=systemctl poweroff --quiet/' /usr/share/applications/lxqt-shutdown.desktop
+sed -i 's/.*Categories=.*/Categories=System;TextEditor;/' /usr/share/applications/featherpad.desktop
+sed -i 's/.*Categories=.*/Categories=FileManager;System;Core;Qt;/' /usr/share/applications/pcmanfm-qt.desktop
 wget https://raw.githubusercontent.com/MichaelWatts-EHS/ThinClient/main/preseed/panel.conf -O /etc/xdg/lxqt/panel.conf
 cd /usr/share/applications
 rm -f lximage-qt.desktop
@@ -80,6 +82,7 @@ fi
 if [ -f /tmp/ThinClient/installs/EOTSS_Azure.pulsepreconfig ]; then
   /opt/pulsesecure/bin/jamCommand /importfile /tmp/ThinClient/installs/EOTSS_Azure.pulsepreconfig
 fi
+sed -i 's/.*Categories=.*/Categories=Application;Network;/' /usr/share/applications/pulse.desktop
 
 
 
