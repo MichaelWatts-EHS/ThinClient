@@ -89,7 +89,6 @@ sed -i 's/.*Categories=.*/Categories=Application;Network;/' /usr/share/applicati
 # VMware Horizon View Client
 apt install libudev0 -y
 apt install ./$vdiclient_file -y
-#echo "y" | ./$vdiclient_file --console --required --stop-services
 if [ ! -d /etc/vmware ]; then mkdir -p /etc/vmware; fi
 cat << EOF >> /etc/vmware/view-default-config
 view.autoConnectBroker="vdi.ehs.govt.state.ma.us"
@@ -109,8 +108,7 @@ view.allowautoConnectBroker=FALSE
 view.allowdefaultBroker=FALSE
 EOF
 sed -i 's/.*Exec=.*/Exec=vmware-view --fullscreen/' /usr/share/applications/vmware-view.desktop
-
-
+cp /usr/share/applications/vmware-view.desktop /etc/xdg/autostart/vmware-view.desktop
 
 
 # Prep the final step
@@ -121,6 +119,16 @@ else
   wget https://raw.githubusercontent.com/MichaelWatts-EHS/ThinClient/main/preseed/FinishU.sh -O /home/user/$finishU_file
 fi
 chmod a+x /home/user/$finishU_file
+
+#cat << EOF >> /etc/xdg/autostart/finishU.desktop
+#[Desktop Entry]
+#Exec=$HOME/FinishU.sh
+#Name=finishU
+#Type=Application
+#Version=1.0
+#EOF
+
+
 
 # Cleanup
 #apt -y remove zutty qlipper pulseaudio qps xarchiver #lximage-qt qterminal featherpad pcmanfm-qt
