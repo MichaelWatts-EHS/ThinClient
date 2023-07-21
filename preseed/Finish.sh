@@ -16,7 +16,7 @@ echo "Hidden=true" >> /etc/xdg/autostart/lxqt-qlipper-autostart.desktop
 echo "Hidden=true" >> /etc/xdg/autostart/lxqt-xscreensaver-autostart.desktop
 
 # Set the hostname
-hostnamectl set-hostname thinclient
+#hostnamectl set-hostname thinclient
 
 ### Downloads
 # Make the working directory if it doesn't exist
