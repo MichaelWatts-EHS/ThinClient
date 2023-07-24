@@ -52,19 +52,83 @@ elif [ -d /cdrom/preseed/ ]; then
   find /cdrom/preseed/ -name 'ps-pulse-linux-*.deb' | xargs cp -t $install_dir
   find /cdrom/preseed/ -name 'VMware-Horizon-Client-*.deb' | xargs cp -t $install_dir
 else
-  wget https://raw.githubusercontent.com/MichaelWatts-EHS/ThinClient/main/preseed/EOTSS_Azure.pulsepreconfig
+#  wget https://raw.githubusercontent.com/MichaelWatts-EHS/ThinClient/main/preseed/EOTSS_Azure.pulsepreconfig
+  echo "Downloading clients"
   wget https://application.ivanti.com/SSG/Clients/ps-pulse-linux-9.1r11.4-b8575-64-bit-installer.deb
   wget https://download3.vmware.com/software/CART24FQ2_LIN64_DebPkg_2306/VMware-Horizon-Client-2306-8.10.0-21964631.x64.deb
 fi
 
 # Make them trusted and install
 chmod -R a+x $install_dir
+echo "Installing Clients"
 find $install_dir/ -name '*.deb' | xargs apt -y install
+if [ ! -f /opt/pulsesecure/lib/cefRuntime/Release/libcef.so ]; then /opt/pulsesecure/bin/setup_cef.sh install; fi
+
+
+if [ ! -f $install_dir/EOTSS_Azure.pulsepreconfig ]; then
+cat << EOF >> $install_dir/EOTSS_Azure.pulsepreconfig
+schema version {
+    version: "1"
+}
+machine settings {
+    version: "5"
+    guid: "1b8fea84-b452-4426-8e9a-bd7196a489cd"
+    connection-source: "preconfig"
+    server-id: "43aa2c42-bd61-4a9a-b045-09028b38d91f"
+    connection-set-owner: "itdchearlps"
+    connection-set-name: "Comm_of_Mass-Employee"
+    connection-set-last-modified: "2021-06-16 19:40:01 UTC"
+    connection-set-download-host: "itdchearlps:itdchearlps01"
+    allow-save: "false"
+    user-connection: "false"
+    lock-down: "false"
+    splashscreen-display: "true"
+    dynamic-trust: "true"
+    dynamic-connection: "true"
+    eap-fragment-size: "1400"
+    captive-portal-detection: "false"
+    embedded-browser-saml: "true"
+    enable-browser: "false"
+    embedded-cef-browser-saml: "false"
+    FIPSClient: "false"
+    clear-smart-card-pin-cache: "false"
+    block-traffic-on-vpn-disconnect: "false"
+    wireless-suppression: "false"
+    lockdown-exceptions-configured: "false"
+}
+ive "1bb6d4ba-d16b-4d2a-8894-fb9b39881809" {
+    friendly-name: "Commonwealth_VPN"
+    version: "10"
+    guid: "1bb6d4ba-d16b-4d2a-8894-fb9b39881809"
+    client-certificate-selection-rule: "AUTO"
+    client-certificate-matching-rule-smartcard-logon-enabled: "true"
+    client-certificate-matching-rule-eku-oid: ""
+    client-certificate-matching-rule-eku-text: ""
+    server-id: "43aa2c42-bd61-4a9a-b045-09028b38d91f"
+    connection-source: "preconfig"
+    uri-list: "https://mavpn.vpn.state.ma.us/azure/"
+    uri: "https://mavpn.vpn.state.ma.us/azure/"
+    connection-policy-override: "true"
+    connection-lock-down: "false"
+    enable-stealth-mode: "false"
+    show-stealth-connection: "false"
+    use-for-connect: "true"
+    use-for-secure-meetings: "false"
+    this-server: "false"
+    uri-list-use-last-connected: "false"
+    uri-list-randomize: "false"
+    sso-cached-credential: "false"
+    connection-identity: "user"
+    connection-policy: "manual"
+    client-certificate-location-system: "false"
+    reconnect-at-session-timeout: "true"
+}
+EOF
+fi
 
 ### Configure the clients
 # Pulse Secure VPN Client
 sed -i 's/.*Categories=.*/Categories=Application;Network;/' /usr/share/applications/pulse.desktop
-if [ ! -f /opt/pulsesecure/lib/cefRuntime/Release/libcef.so ]; then /opt/pulsesecure/bin/setup_cef.sh install; fi
 if [ -f $install_dir/EOTSS_Azure.pulsepreconfig ]; then /opt/pulsesecure/bin/jamCommand /importfile $install_dir/EOTSS_Azure.pulsepreconfig; fi
 
 # VMware Horizon View Client
@@ -134,14 +198,29 @@ type=worldclock
 EOF
 ## ===================================
 
+cat << EOF >> /home/user/FinishU.sh
+#!/bin/bash
+rm -f $HOME/Desktop/computer.desktop
+rm -f $HOME/Desktop/network.desktop
+rm -f $HOME/Desktop/trash-can.desktop
+rm -f $HOME/Desktop/user-home.desktop
+rm -f /etc/xdg/autostart/RunOnce.desktop
+rm $0
+systemctl --no-wall reboot
+exit
+EOF
+chmod a+rwx /home/user/FinishU.sh
+
 # Add RunOnce
 cat << EOF >> /etc/xdg/autostart/RunOnce.desktop
 [Desktop Entry]
-Exec=/usr/bin/bash wget -q https://raw.githubusercontent.com/MichaelWatts-EHS/ThinClient/main/home/FinishU.sh; chmod +x FinishU.sh; . FinishU.sh
+#Exec=/usr/bin/bash wget -q https://raw.githubusercontent.com/MichaelWatts-EHS/ThinClient/main/home/FinishU.sh; chmod +x FinishU.sh; . FinishU.sh
+Exec=/usr/bin/bash /home/user/FinishU.sh
 Name=RunOnce
 Type=Application
 Version=1.0
 EOF
+chmod a+rwx /etc/xdg/autostart/RunOnce.desktop
 
 
 
