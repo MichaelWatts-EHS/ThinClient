@@ -205,7 +205,7 @@ rm -f /home/user/Desktop/network.desktop
 rm -f /home/user/Desktop/trash-can.desktop
 rm -f /home/user/Desktop/user-home.desktop
 rm -f /etc/xdg/autostart/RunOnce.desktop
-rm $0
+rm -f /home/user/RunOnce.sh
 systemctl --no-wall reboot
 exit
 EOF
