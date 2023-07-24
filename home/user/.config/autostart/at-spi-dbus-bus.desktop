@@ -1,8 +1,0 @@
-[Desktop Entry]
-Exec=/usr/libexec/at-spi-bus-launcher --launch-immediately
-Hidden=true
-Name=AT-SPI D-Bus Bus
-NoDisplay=true
-Type=Application
-X-GNOME-AutoRestart=true
-X-GNOME-Autostart-Phase=Initialization
