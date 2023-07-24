@@ -214,13 +214,12 @@ chmod a+rwx /home/user/FinishU.sh
 # Add RunOnce
 cat << EOF >> /etc/xdg/autostart/RunOnce.desktop
 [Desktop Entry]
-#Exec=/usr/bin/bash wget -q https://raw.githubusercontent.com/MichaelWatts-EHS/ThinClient/main/home/FinishU.sh; chmod +x FinishU.sh; . FinishU.sh
 Exec=/usr/bin/bash /home/user/FinishU.sh
 Name=RunOnce
 Type=Application
 Version=1.0
 EOF
-chmod a+rwx /etc/xdg/autostart/RunOnce.desktop
+chmod -R 777 /etc/xdg/autostart
 
 
 
@@ -237,6 +236,5 @@ chmod a+rwx /etc/xdg/autostart/RunOnce.desktop
 
 
 # Finish and exit
-#wget https://raw.githubusercontent.com/MichaelWatts-EHS/ThinClient/main/preseed/Finish2.sh -O /home/user/Finish2.sh
 exit
 
