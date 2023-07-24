@@ -206,7 +206,7 @@ rm -f $HOME/Desktop/trash-can.desktop
 rm -f $HOME/Desktop/user-home.desktop
 rm -f /etc/xdg/autostart/RunOnce.desktop
 rm $0
-systemctl --no-wall reboot
+#systemctl --no-wall reboot
 exit
 EOF
 chmod a+rwx /home/user/FinishU.sh
