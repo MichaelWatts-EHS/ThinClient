@@ -198,23 +198,23 @@ type=worldclock
 EOF
 ## ===================================
 
-cat << EOF >> /home/user/FinishU.sh
+cat << EOF >> /home/user/RunOnce.sh
 #!/bin/bash
-rm -f $HOME/Desktop/computer.desktop
-rm -f $HOME/Desktop/network.desktop
-rm -f $HOME/Desktop/trash-can.desktop
-rm -f $HOME/Desktop/user-home.desktop
+rm -f /home/user/Desktop/computer.desktop
+rm -f /home/user/Desktop/network.desktop
+rm -f /home/user/Desktop/trash-can.desktop
+rm -f /home/user/Desktop/user-home.desktop
 rm -f /etc/xdg/autostart/RunOnce.desktop
 rm $0
-#systemctl --no-wall reboot
+systemctl --no-wall reboot
 exit
 EOF
-chmod a+rwx /home/user/FinishU.sh
+chmod a+rwx /home/user/RunOnce.sh
 
 # Add RunOnce
 cat << EOF >> /etc/xdg/autostart/RunOnce.desktop
 [Desktop Entry]
-Exec=/usr/bin/bash /home/user/FinishU.sh
+Exec=/usr/bin/bash /home/user/RunOnce.sh
 Name=RunOnce
 Type=Application
 Version=1.0
