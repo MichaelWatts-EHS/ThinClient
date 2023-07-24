@@ -200,6 +200,7 @@ EOF
 
 cat << EOF >> /home/user/RunOnce.sh
 #!/bin/bash
+sleep 5
 rm -f /home/user/Desktop/computer.desktop
 rm -f /home/user/Desktop/network.desktop
 rm -f /home/user/Desktop/trash-can.desktop
@@ -218,6 +219,7 @@ Exec=/usr/bin/bash /home/user/RunOnce.sh
 Name=RunOnce
 Type=Application
 Version=1.0
+X-LXQt-Need-Tray=true
 EOF
 chmod -R 777 /etc/xdg/autostart
 
