@@ -19,7 +19,9 @@ chmod -R a+x $install_dir
 find $install_dir/ -name '*.deb' | xargs apt -y install
 if [ -f /opt/pulsesecure/bin/setup_cef.sh ]; then /opt/pulsesecure/bin/setup_cef.sh install; fi
 cp $install_dir/ps-pulse-linux.pulsepreconfig /opt/pulsesecure/bin/ps-pulse-linux.pulsepreconfig
-if [ -f $install_dir/ps-pulse-linux.pulsepreconfig ]; then /opt/pulsesecure/bin/jamCommand /importfile $install_dir/ps-pulse-linux.pulsepreconfig; fi
+cd /opt/pulsesecure/bin; ./jamCommand /importfile ps-pulse-linux.pulsepreconfig; cd $install_dir
+
+#if [ -f $install_dir/ps-pulse-linux.pulsepreconfig ]; then /opt/pulsesecure/bin/jamCommand /importfile $install_dir/ps-pulse-linux.pulsepreconfig; fi
 if [ -f /usr/share/applications/pulse.desktop ]; then sed -i 's/.*Categories=.*/Categories=Application;Network;/' /usr/share/applications/pulse.desktop; fi
 if [ -f /usr/share/applications/vmware-view.desktop ]; then sed -i 's/.*Exec=.*/Exec=vmware-view --fullscreen/' /usr/share/applications/vmware-view.desktop; fi
 if [ ! -d /etc/vmware ]; then mkdir -p /etc/vmware; fi
@@ -50,6 +52,7 @@ sed -i 's/.*autologin-user=.*/autologin-user=user/' /etc/lightdm/lightdm.conf
 sed -i 's/.*autologin-user-timeout=.*/autologin-user-timeout=0/' /etc/lightdm/lightdm.conf
 
 # Configure autostart apps
+chmod -R 777 /etc/xdg/autostart
 echo "Hidden=true" >> /etc/xdg/autostart/at-spi-dbus-bus.desktop
 echo "Hidden=true" >> /etc/xdg/autostart/print-applet.desktop
 echo "Hidden=true" >> /etc/xdg/autostart/pulseaudio.desktop
@@ -125,10 +128,10 @@ EOF
 
 
 
-chmod -R 777 /etc/xdg/autostart
+
 cat << EOF >> /home/user/RunOnce.sh
 #!/bin/bash
-sleep 5
+sleep 15
 rm -f /home/user/Desktop/computer.desktop
 rm -f /home/user/Desktop/network.desktop
 rm -f /home/user/Desktop/trash-can.desktop
