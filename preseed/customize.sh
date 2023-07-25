@@ -13,18 +13,15 @@ if [ ! -d $install_dir ]; then
   wget https://application.ivanti.com/SSG/Clients/ps-pulse-linux-9.1r11.4-b8575-64-bit-installer.deb
   wget https://download3.vmware.com/software/CART24FQ2_LIN64_DebPkg_2306/VMware-Horizon-Client-2306-8.10.0-21964631.x64.deb
   wget https://raw.githubusercontent.com/MichaelWatts-EHS/ThinClient/main/preseed/ps-pulse-linux.pulsepreconfig
-  
 fi
 cd $install_dir
 chmod -R a+x $install_dir
 find $install_dir/ -name '*.deb' | xargs apt -y install
 if [ -f /opt/pulsesecure/bin/setup_cef.sh ]; then /opt/pulsesecure/bin/setup_cef.sh install; fi
+cp $install_dir/ps-pulse-linux.pulsepreconfig /opt/pulsesecure/bin/ps-pulse-linux.pulsepreconfig
 if [ -f $install_dir/ps-pulse-linux.pulsepreconfig ]; then /opt/pulsesecure/bin/jamCommand /importfile $install_dir/ps-pulse-linux.pulsepreconfig; fi
 if [ -f /usr/share/applications/pulse.desktop ]; then sed -i 's/.*Categories=.*/Categories=Application;Network;/' /usr/share/applications/pulse.desktop; fi
-if [ -f /usr/share/applications/vmware-view.desktop ]; then 
-  sed -i 's/.*Exec=.*/Exec=vmware-view --fullscreen/' /usr/share/applications/vmware-view.desktop
-  cp /usr/share/applications/vmware-view.desktop /etc/xdg/autostart/vmware-view.desktop
-fi
+if [ -f /usr/share/applications/vmware-view.desktop ]; then sed -i 's/.*Exec=.*/Exec=vmware-view --fullscreen/' /usr/share/applications/vmware-view.desktop; fi
 if [ ! -d /etc/vmware ]; then mkdir -p /etc/vmware; fi
 cat << EOF >> /etc/vmware/view-default-config
 view.autoConnectBroker="vdi.ehs.govt.state.ma.us"
@@ -128,7 +125,7 @@ EOF
 
 
 
-
+chmod -R 777 /etc/xdg/autostart
 cat << EOF >> /home/user/RunOnce.sh
 #!/bin/bash
 sleep 5
@@ -138,6 +135,7 @@ rm -f /home/user/Desktop/trash-can.desktop
 rm -f /home/user/Desktop/user-home.desktop
 rm -f /etc/xdg/autostart/RunOnce.desktop
 rm -f /home/user/RunOnce.sh
+cp /usr/share/applications/vmware-view.desktop /etc/xdg/autostart/vmware-view.desktop
 systemctl --no-wall reboot
 exit
 EOF
@@ -150,8 +148,9 @@ Exec=/usr/bin/bash /home/user/RunOnce.sh
 Name=RunOnce
 Type=Application
 Version=1.0
+X-LXQt-Need-Tray=true
 EOF
-chmod -R 777 /etc/xdg/autostart
+
 
 # Finish and exit
 exit
