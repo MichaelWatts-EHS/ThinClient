@@ -21,20 +21,9 @@ chmod -R a+x $install_dir
 
 # Run the client installs
 find $install_dir/ -name '*.deb' | xargs apt -y install
-
-if [ -f /opt/pulsesecure/bin/setup_cef.sh ]; then
-  /opt/pulsesecure/bin/setup_cef.sh install
-  sleep 5
-  /opt/pulsesecure/bin/setup_cef.sh reinstall >>$logfile
-fi
-
 if [ -f $install_dir/ps-pulse-linux.pulsepreconfig ]; then cp $install_dir/ps-pulse-linux.pulsepreconfig /opt/pulsesecure/bin/ps-pulse-linux.pulsepreconfig; fi
-/opt/pulsesecure/bin/jamCommand >>$logfile
-/opt/pulsesecure/bin/jamCommand /importfile /opt/pulsesecure/bin/ps-pulse-linux.pulsepreconfig >>$logfile
-
-#if [ -f /opt/pulsesecure/bin/jamCommand ]; then
-#  /opt/pulsesecure/bin/jamCommand /importfile $install_dir/ps-pulse-linux.pulsepreconfig
-#fi
+if [ -f /opt/pulsesecure/bin/setup_cef.sh ]; then /opt/pulsesecure/bin/setup_cef.sh install; sleep 3; /opt/pulsesecure/bin/setup_cef.sh reinstall; fi
+# /opt/pulsesecure/bin/jamCommand fails with a DBUS error (unable to access network interface)
 
 if [ -f /usr/share/applications/pulse.desktop ]; then sed -i 's/.*Categories=.*/Categories=Application;Network;/' /usr/share/applications/pulse.desktop; fi
 if [ -f /usr/share/applications/vmware-view.desktop ]; then sed -i 's/.*Exec=.*/Exec=vmware-view --fullscreen/' /usr/share/applications/vmware-view.desktop; fi
@@ -145,13 +134,16 @@ EOF
 
 cat << EOF >> /home/user/RunOnce.sh
 #!/bin/bash
-sleep 15
-rm -f /home/user/Desktop/computer.desktop
-rm -f /home/user/Desktop/network.desktop
-rm -f /home/user/Desktop/trash-can.desktop
-rm -f /home/user/Desktop/user-home.desktop
+sleep 5
+
+#rm -f /home/user/Desktop/computer.desktop
+#rm -f /home/user/Desktop/network.desktop
+#rm -f /home/user/Desktop/trash-can.desktop
+#rm -f /home/user/Desktop/user-home.desktop
+
 rm -f /etc/xdg/autostart/RunOnce.desktop
 rm -f /home/user/RunOnce.sh
+/opt/pulsesecure/bin/jamCommand /importfile /opt/pulsesecure/bin/ps-pulse-linux.pulsepreconfig
 cp /usr/share/applications/vmware-view.desktop /etc/xdg/autostart/vmware-view.desktop
 systemctl --no-wall reboot
 exit
