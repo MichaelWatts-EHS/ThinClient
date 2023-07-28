@@ -1,10 +1,10 @@
 #!/bin/bash
 
 ### Get the required files
-install_dir=/tmp/ThinClient
+install_dir=/tmp/thinclient
 
 # Copy them from media if found
-find /media -maxdepth 2 -type d -name preseed -exec cp {} -R $install_dir \;
+find /media -maxdepth 2 -type d -name thinclient -exec cp {} -R $install_dir \;
 
 # Download them if needed
 if [ ! -d $install_dir ]; then
@@ -16,12 +16,20 @@ if [ ! -d $install_dir ]; then
 fi
 cd $install_dir
 chmod -R a+x $install_dir
-find $install_dir/ -name '*.deb' | xargs apt -y install
-if [ -f /opt/pulsesecure/bin/setup_cef.sh ]; then /opt/pulsesecure/bin/setup_cef.sh install; fi
-cp $install_dir/ps-pulse-linux.pulsepreconfig /opt/pulsesecure/bin/ps-pulse-linux.pulsepreconfig
-cd /opt/pulsesecure/bin; ./jamCommand /importfile ps-pulse-linux.pulsepreconfig; cd $install_dir
 
-#if [ -f $install_dir/ps-pulse-linux.pulsepreconfig ]; then /opt/pulsesecure/bin/jamCommand /importfile $install_dir/ps-pulse-linux.pulsepreconfig; fi
+# Run the client installs
+find $install_dir/ -name '*.deb' | xargs apt -y install
+
+if [ -f /opt/pulsesecure/bin/setup_cef.sh ]; then
+  /opt/pulsesecure/bin/setup_cef.sh install
+  sleep 5
+  /opt/pulsesecure/bin/setup_cef.sh reinstall
+fi
+
+if [ -f /opt/pulsesecure/bin/jamCommand ]; then
+  /opt/pulsesecure/bin/jamCommand /importfile "$install_dir/ps-pulse-linux.pulsepreconfig"
+fi
+
 if [ -f /usr/share/applications/pulse.desktop ]; then sed -i 's/.*Categories=.*/Categories=Application;Network;/' /usr/share/applications/pulse.desktop; fi
 if [ -f /usr/share/applications/vmware-view.desktop ]; then sed -i 's/.*Exec=.*/Exec=vmware-view --fullscreen/' /usr/share/applications/vmware-view.desktop; fi
 if [ ! -d /etc/vmware ]; then mkdir -p /etc/vmware; fi
