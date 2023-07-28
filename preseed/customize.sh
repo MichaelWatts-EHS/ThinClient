@@ -143,7 +143,7 @@ sleep 5
 
 rm -f /etc/xdg/autostart/RunOnce.desktop
 rm -f /home/user/RunOnce.sh
-/opt/pulsesecure/bin/jamCommand /importfile /opt/pulsesecure/bin/ps-pulse-linux.pulsepreconfig
+#/opt/pulsesecure/bin/jamCommand /importfile /opt/pulsesecure/bin/ps-pulse-linux.pulsepreconfig
 cp /usr/share/applications/vmware-view.desktop /etc/xdg/autostart/vmware-view.desktop
 systemctl --no-wall reboot
 exit
