@@ -2,6 +2,8 @@
 
 ### Get the required files
 install_dir=/tmp/thinclient
+logfile=/home/user/customize.log
+echo "Begin" >$logfile
 
 # Copy them from media if found
 find /media -maxdepth 2 -type d -name thinclient -exec cp {} -R $install_dir \;
@@ -14,7 +16,7 @@ if [ ! -d $install_dir ]; then
   wget https://download3.vmware.com/software/CART24FQ2_LIN64_DebPkg_2306/VMware-Horizon-Client-2306-8.10.0-21964631.x64.deb
   wget https://raw.githubusercontent.com/MichaelWatts-EHS/ThinClient/main/preseed/ps-pulse-linux.pulsepreconfig
 else
-  echo "$install_dir exists.  It worked" >/home/user/customize.log
+  echo "$install_dir exists.  It worked" >>$logfile
 fi
 cd $install_dir
 chmod -R a+x $install_dir
@@ -28,9 +30,13 @@ if [ -f /opt/pulsesecure/bin/setup_cef.sh ]; then
   /opt/pulsesecure/bin/setup_cef.sh reinstall
 fi
 
-if [ -f /opt/pulsesecure/bin/jamCommand ]; then
-  /opt/pulsesecure/bin/jamCommand /importfile "$install_dir/ps-pulse-linux.pulsepreconfig"
-fi
+
+if [ -f $install_dir/ps-pulse-linux.pulsepreconfig ]; then echo "$install_dir/ps-pulse-linux.pulsepreconfig exists" >>$logfile; fi
+/opt/pulsesecure/bin/jamCommand /importfile $install_dir/ps-pulse-linux.pulsepreconfig >>$logfile
+
+#if [ -f /opt/pulsesecure/bin/jamCommand ]; then
+#  /opt/pulsesecure/bin/jamCommand /importfile $install_dir/ps-pulse-linux.pulsepreconfig
+#fi
 
 if [ -f /usr/share/applications/pulse.desktop ]; then sed -i 's/.*Categories=.*/Categories=Application;Network;/' /usr/share/applications/pulse.desktop; fi
 if [ -f /usr/share/applications/vmware-view.desktop ]; then sed -i 's/.*Exec=.*/Exec=vmware-view --fullscreen/' /usr/share/applications/vmware-view.desktop; fi
