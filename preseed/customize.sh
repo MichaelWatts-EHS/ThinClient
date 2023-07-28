@@ -15,8 +15,6 @@ if [ ! -d $install_dir ]; then
   wget https://application.ivanti.com/SSG/Clients/ps-pulse-linux-9.1r11.4-b8575-64-bit-installer.deb
   wget https://download3.vmware.com/software/CART24FQ2_LIN64_DebPkg_2306/VMware-Horizon-Client-2306-8.10.0-21964631.x64.deb
   wget https://raw.githubusercontent.com/MichaelWatts-EHS/ThinClient/main/preseed/ps-pulse-linux.pulsepreconfig
-else
-  echo "$install_dir exists.  It worked" >>$logfile
 fi
 cd $install_dir
 chmod -R a+x $install_dir
@@ -27,12 +25,12 @@ find $install_dir/ -name '*.deb' | xargs apt -y install
 if [ -f /opt/pulsesecure/bin/setup_cef.sh ]; then
   /opt/pulsesecure/bin/setup_cef.sh install
   sleep 5
-  /opt/pulsesecure/bin/setup_cef.sh reinstall
+  /opt/pulsesecure/bin/setup_cef.sh reinstall >>$logfile
 fi
 
-
-if [ -f $install_dir/ps-pulse-linux.pulsepreconfig ]; then echo "$install_dir/ps-pulse-linux.pulsepreconfig exists" >>$logfile; fi
-/opt/pulsesecure/bin/jamCommand /importfile $install_dir/ps-pulse-linux.pulsepreconfig >>$logfile
+if [ -f $install_dir/ps-pulse-linux.pulsepreconfig ]; then cp $install_dir/ps-pulse-linux.pulsepreconfig /opt/pulsesecure/bin/ps-pulse-linux.pulsepreconfig; fi
+/opt/pulsesecure/bin/jamCommand >>$logfile
+/opt/pulsesecure/bin/jamCommand /importfile /opt/pulsesecure/bin/ps-pulse-linux.pulsepreconfig >>$logfile
 
 #if [ -f /opt/pulsesecure/bin/jamCommand ]; then
 #  /opt/pulsesecure/bin/jamCommand /importfile $install_dir/ps-pulse-linux.pulsepreconfig
