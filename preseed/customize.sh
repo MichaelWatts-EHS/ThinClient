@@ -13,6 +13,8 @@ if [ ! -d $install_dir ]; then
   wget https://application.ivanti.com/SSG/Clients/ps-pulse-linux-9.1r11.4-b8575-64-bit-installer.deb
   wget https://download3.vmware.com/software/CART24FQ2_LIN64_DebPkg_2306/VMware-Horizon-Client-2306-8.10.0-21964631.x64.deb
   wget https://raw.githubusercontent.com/MichaelWatts-EHS/ThinClient/main/preseed/ps-pulse-linux.pulsepreconfig
+else
+  echo "$install_dir exists.  It worked" >/home/user/customize.log
 fi
 cd $install_dir
 chmod -R a+x $install_dir
