@@ -2,8 +2,7 @@
 
 ### Get the required files
 install_dir=/tmp/thinclient
-logfile=/home/user/customize.log
-echo "Begin" >$logfile
+#logfile=/home/user/customize.log; echo "Begin" >$logfile
 
 # Copy them from media if found
 find /media -maxdepth 2 -type d -name thinclient -exec cp {} -R $install_dir \;
