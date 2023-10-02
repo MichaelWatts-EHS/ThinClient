@@ -19,9 +19,11 @@ cd $install_dir
 chmod -R a+x $install_dir
 
 # Run the client installs
+apt -y install net-tools
 find $install_dir/ -name '*.deb' | xargs apt -y install
 if [ -f $install_dir/ps-pulse-linux.pulsepreconfig ]; then cp $install_dir/ps-pulse-linux.pulsepreconfig /opt/pulsesecure/bin/ps-pulse-linux.pulsepreconfig; fi
 if [ -f /opt/pulsesecure/bin/setup_cef.sh ]; then /opt/pulsesecure/bin/setup_cef.sh install; sleep 3; /opt/pulsesecure/bin/setup_cef.sh reinstall; fi
+/opt/pulsesecure/bin/jamCommand /importfile /opt/pulsesecure/bin/ps-pulse-linux.pulsepreconfig
 # /opt/pulsesecure/bin/jamCommand fails with a DBUS error (unable to access network interface)
 
 if [ -f /usr/share/applications/pulse.desktop ]; then sed -i 's/.*Categories=.*/Categories=Application;Network;/' /usr/share/applications/pulse.desktop; fi
