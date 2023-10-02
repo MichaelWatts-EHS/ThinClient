@@ -2,7 +2,8 @@
 
 ### Get the required files
 install_dir=/tmp/thinclient
-#logfile=/home/user/customize.log; echo "Begin" >$logfile
+logfile=/home/user/customize.log
+echo "Begin" >$logfile
 
 # Copy them from media if found
 find /media -maxdepth 2 -type d -name thinclient -exec cp {} -R $install_dir \;
@@ -19,11 +20,9 @@ cd $install_dir
 chmod -R a+x $install_dir
 
 # Run the client installs
-apt -y install net-tools
 find $install_dir/ -name '*.deb' | xargs apt -y install
 if [ -f $install_dir/ps-pulse-linux.pulsepreconfig ]; then cp $install_dir/ps-pulse-linux.pulsepreconfig /opt/pulsesecure/bin/ps-pulse-linux.pulsepreconfig; fi
 if [ -f /opt/pulsesecure/bin/setup_cef.sh ]; then /opt/pulsesecure/bin/setup_cef.sh install; sleep 3; /opt/pulsesecure/bin/setup_cef.sh reinstall; fi
-/opt/pulsesecure/bin/jamCommand /importfile /opt/pulsesecure/bin/ps-pulse-linux.pulsepreconfig
 # /opt/pulsesecure/bin/jamCommand fails with a DBUS error (unable to access network interface)
 
 if [ -f /usr/share/applications/pulse.desktop ]; then sed -i 's/.*Categories=.*/Categories=Application;Network;/' /usr/share/applications/pulse.desktop; fi
@@ -144,7 +143,7 @@ sleep 5
 
 rm -f /etc/xdg/autostart/RunOnce.desktop
 rm -f /home/user/RunOnce.sh
-#/opt/pulsesecure/bin/jamCommand /importfile /opt/pulsesecure/bin/ps-pulse-linux.pulsepreconfig
+'/opt/pulsesecure/bin/jamCommand' /importfile '/opt/pulsesecure/bin/ps-pulse-linux.pulsepreconfig'
 cp /usr/share/applications/vmware-view.desktop /etc/xdg/autostart/vmware-view.desktop
 systemctl --no-wall reboot
 exit
